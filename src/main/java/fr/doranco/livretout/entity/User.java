@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -73,18 +74,18 @@ public class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Adresse> adresses;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "adresse_facturation", nullable = false)
 	private Integer adresseFacturationId;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "adresse_livraison", nullable = false)
 	private Integer adresseLivraisonId;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<CartePaiement> cartes;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "carte_paiement_default", nullable = false)
 	private Integer cartePaiementDefautId;
 	
