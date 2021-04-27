@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<jsp:forward page="/main.xhtml"></jsp:forward>
 <title>Livre tout</title>
 </head>
 <body>
