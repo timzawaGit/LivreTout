@@ -29,6 +29,10 @@ public class Category {
 	@Column(name = "nomCategory", length=45, nullable = false)
 	private String nomCategory;
 	
+	@NotNull
+	@Column(name = "remise", length=5, nullable = false)
+	private Integer remise;
+	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.LAZY)
 	private List<Article> articles;
@@ -39,9 +43,10 @@ public class Category {
 	}
 
 
-	public Category( String nomCategory) {
+	public Category( String nomCategory, @NotNull Integer remise) {
 		
 		this.nomCategory = nomCategory;
+		this.remise = remise;
 		articles = new ArrayList<Article>();
 		
 	}
@@ -65,7 +70,20 @@ public class Category {
 	public void setNomCategory(String nomCategory) {
 		this.nomCategory = nomCategory;
 	}
+	
+	
 
+
+	public Integer getRemise() {
+		return remise;
+	}
+
+
+	public void setRemise(Integer remise) {
+		this.remise = remise;
+	}
+
+	// pour liste Article, on ne met que le getter
 
 	public List<Article> getArticles() {
 		return articles;

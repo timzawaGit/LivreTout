@@ -21,11 +21,15 @@ public class Main {
 		
 		Category category = new Category();
 		category.setNomCategory("fruits");
+		category.setRemise(10);
 		//category.setArticle(article);
 		
 		Article article = new Article();
 		article.setIntitule("mirtille");
 		article.setPrix(2);
+		article.setCommentaire("c'est de la merde");
+		article.setDescription("des fruits bio venant des montagne du caucase");
+		article.setRemise(10);
 		article.setQuantite(1);
 		article.setCategory(category);
 		// il faut absolument call la DAO pour la base, ne pas faire comme ci-dessus
