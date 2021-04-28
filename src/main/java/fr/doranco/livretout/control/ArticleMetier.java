@@ -11,7 +11,7 @@ public class ArticleMetier implements IArticleMetier {
 	private ArticleDao articleDao = new ArticleDao();
 
 	@Override
-	public Article addArticle(Article article) throws SQLException {
+	public Article addArticle(Article article) throws Exception {
 		
 		if(article==null) {
 			throw new NullPointerException ("L'article ne peut pas etre null");
@@ -28,26 +28,26 @@ public class ArticleMetier implements IArticleMetier {
 	}
 
 	@Override
-	public Article getArticles(Integer id) throws SQLException {
+	public Article getArticles(Integer id) throws Exception {
 		
 		return articleDao.getArticles(id);
 	}
 
 	@Override
-	public List<Article> getArticlesAll() throws SQLException {
+	public List<Article> getArticlesAll() throws Exception {
 		
 		return articleDao.getArticlesAll();
 	}
 
 	// update avec le id ou article en parametre ??
 	@Override
-	public void updateArticle(Integer id) throws SQLException {
+	public void updateArticle(Integer id) throws Exception {
 		articleDao.updateArticle(id);
 		
 	}
 
 	@Override
-	public void removeArticle(Integer id) throws SQLException {
+	public void removeArticle(Integer id) throws Exception {
 		articleDao.removeArticle(id);
 		
 	}
