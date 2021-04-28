@@ -1,40 +1,57 @@
 package fr.doranco.livretout.main;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import fr.doranco.livretout.control.ArticleMetier;
 import fr.doranco.livretout.dao.AdresseDao;
 import fr.doranco.livretout.dao.ArticleDao;
-import fr.doranco.livretout.entity.Adresse;
+import fr.doranco.livretout.dao.CategoryDao;
 import fr.doranco.livretout.entity.Article;
-import fr.doranco.livretout.entity.User;
+import fr.doranco.livretout.entity.Category;
 
 public class Main {
 	
-	private static AdresseDao adresseDao = new AdresseDao();
+
+	private static final ArticleMetier articleMetier = new ArticleMetier();
+	private static final ArticleDao articleDao = new ArticleDao();
+	private static final CategoryDao categoryDao = new CategoryDao();
 
 	public static void main(String[] args) {
 		
+		Category category = new Category();
+		category.setNomCategory("fruits");
+		//category.setArticle(article);
 		
-		User user = new User("PAN", "Peter", "pan@gmail.com");
+		Article article = new Article();
+		article.setIntitule("mirtille");
+		article.setPrix(2);
+		article.setQuantite(1);
+		article.setCategory(category);
+		// il faut absolument call la DAO pour la base, ne pas faire comme ci-dessus
+		//category.getArticles().add(article);
 		
-		Adresse adresse1 = new Adresse();
-		
-		adresse1.setNumero(12);
-		adresse1.setRue("rue de paris");
-		adresse1.setVille("Paris");
-		adresse1.setCodePostal("75006");
-		adresse1.setUser(user);
-		
-		user.getAdresses().add(adresse1);
 		
 		try {
-			adresseDao.add(adresse1);
-			System.out.println("id adresse ajoute : " + adresse1.getId());
+			categoryDao.addCategory(category);
+			System.out.println("categorie ajoutee: " + category.getId());
+			articleDao.addArticle(article);
+			System.out.println("article ajoute: " + article.getId());
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+//		
+//		try {
+//			List<Article>articles = articleDao.getArticlesAll();
+//			System.out.println("la liste des articles: " + articles);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}		
 		
 		
 

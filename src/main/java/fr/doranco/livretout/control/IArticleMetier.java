@@ -9,11 +9,11 @@ public interface IArticleMetier {
 	
 	//CRUD
 	
-			Article addArticle(Article article) throws SQLException;
-			Article getArticles (Integer id) throws SQLException;
+			Article addArticle(Article article) throws Exception;
+			Article getArticles (Integer id) throws Exception;
 			// ou bien afficher la liste des article
-			List<Article> getArticlesAll() throws SQLException;
-			void updateArticle (Integer id)throws SQLException;
-			void removeArticle(Integer id)throws SQLException;
+			List<Article> getArticlesAll() throws Exception;
+			void updateArticle (Integer id)throws Exception;
+			void removeArticle(Integer id)throws Exception;
 
 }

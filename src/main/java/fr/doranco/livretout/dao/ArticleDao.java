@@ -8,47 +8,71 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import fr.doranco.livretout.entity.Article;
+import fr.doranco.livretout.hibernate.connector.HibernateConnector;
 
 public class ArticleDao implements IArticleDao {
+	
+
+	public ArticleDao() {
+		
+	}
 
 	@Override
-	public Article addArticle(Article article) throws SQLException {
-		if(article==null) {
-			throw new NullPointerException ("L'article ne peut pas etre null");
-			
+	public Article addArticle(Article article) throws Exception {
+		Session session = null;
+		Transaction tx = null;
+		
+		try {
+			session = HibernateConnector.getsession();
+			tx= session.beginTransaction();
+			session.save(article);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx!=null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			if(session!=null&& session.isOpen())
+				session.close();
 		}
-		if(article.getIntitule()==null || article.getIntitule().isEmpty()
-		|| article.getPrix()==null || article.getPrix()<=0
-		// je pense que la quantite ne doit pas etre mise......
-		|| article.getQuantite()==null || article.getQuantite()<=0) {
-			throw new IllegalArgumentException("Tous les paramentres de l'article ne peuvent etre null... ");
-	}
-	//	LivreToutDataSource ds = new LivreToutDataSource();
-	//	Connection connexion = ds.getConnection();
+//		if(article==null) {
+//			throw new NullPointerException ("L'article ne peut pas etre null");
+//			
+//		}
+//		if(article.getIntitule()==null || article.getIntitule().isEmpty()
+//		|| article.getPrix()==null || article.getPrix()<=0
+//		// je pense que la quantite ne doit pas etre mise......
+//		|| article.getQuantite()==null || article.getQuantite()<=0) {
+//			throw new IllegalArgumentException("Tous les paramentres de l'article ne peuvent etre null... ");
+//	}
+//	//	LivreToutDataSource ds = new LivreToutDataSource();
+//	//	Connection connexion = ds.getConnection();
+//		
+//		Connection connexion = LivreToutDataSource.getInstance().getConnection();
 		
-		Connection connexion = LivreToutDataSource.getInstance().getConnection();
-		
-		
-		String requete = "INSERT INTO article(intitule, prix, quantite)"
-				+ "VALUES(?,?,?)";
-		PreparedStatement ps =  connexion.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-		ps.setString(1,article.getIntitule());
-		ps.setInt(2,article.getPrix());
-		ps.setInt(3, article.getQuantite());
-		
-		ps.executeUpdate();
-		ResultSet rs = ps.getGeneratedKeys();
-		
-		if(rs.next()) {
-			int id = rs.getInt(1);
-			article.setId(id);
-			
-		}
-		if(connexion != null) {
-			connexion.close();
-		}
+//		
+//		String requete = "INSERT INTO article(intitule, prix, quantite)"
+//				+ "VALUES(?,?,?)";
+//		PreparedStatement ps =  connexion.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
+//		ps.setString(1,article.getIntitule());
+//		ps.setInt(2,article.getPrix());
+//		ps.setInt(3, article.getQuantite());
+//		
+//		ps.executeUpdate();
+//		ResultSet rs = ps.getGeneratedKeys();
+//		
+//		if(rs.next()) {
+//			int id = rs.getInt(1);
+//			article.setId(id);
+//			
+//		}
+//		if(connexion != null) {
+//			connexion.close();
+//		}
 		return article;
 	}
 
