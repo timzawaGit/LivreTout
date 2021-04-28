@@ -32,15 +32,15 @@ public class Adresse implements Serializable {
 	@Column(name = "numero", nullable = false)
 	private Integer numero;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "rue", length = 45, nullable = false)
 	private String rue;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "code_postal", length = 5, nullable = false)
-	private Integer codePostal;
+	private String codePostal;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "ville", length = 25, nullable = false)
 	private String ville;
 	
@@ -51,15 +51,7 @@ public class Adresse implements Serializable {
 	public Adresse() {
 	}
 
-	public Adresse(@NotNull Integer numero, @NotEmpty String rue, @NotEmpty Integer codePostal, @NotEmpty String ville,
-			fr.doranco.livretout.entity.User user) {
-		super();
-		this.numero = numero;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.user = user;
-	}
+
 
 	public Integer getId() {
 		return id;
@@ -85,13 +77,6 @@ public class Adresse implements Serializable {
 		this.rue = rue;
 	}
 
-	public Integer getCodePostal() {
-		return codePostal;
-	}
-
-	public void setCodePostal(Integer codePostal) {
-		this.codePostal = codePostal;
-	}
 
 	public String getVille() {
 		return ville;
@@ -108,11 +93,25 @@ public class Adresse implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Adresse [id=" + id + ", numero=" + numero + ", rue=" + rue + ", codePostal=" + codePostal + ", ville="
 				+ ville + ", user=" + user + "]";
+	}
+
+
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
 	}
 	
 	

@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<jsp:forward page="/page1.xhtml"></jsp:forward>
+
 <title>Livre tout</title>
 </head>
 <body>
-On vous livre tout meme pendant le couvre-feu !
+	<jsp:forward page="/main.xhtml"></jsp:forward>
 </body>
 </html>
