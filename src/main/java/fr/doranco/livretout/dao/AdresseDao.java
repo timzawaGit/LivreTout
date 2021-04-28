@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import fr.doranco.livretout.entity.Adresse;
+import fr.doranco.livretout.hibernate.connector.HibernateConnector;
 
 public class AdresseDao implements IAdresseDao {
 	
@@ -21,7 +22,7 @@ public class AdresseDao implements IAdresseDao {
 		Session session = null;
 		Transaction tx = null;
 		try {
-			//session = HibernateConnector.getSession();
+			session = HibernateConnector.getsession();
 			tx = session.beginTransaction();
 			session.save(adresse);
 			tx.commit();
@@ -40,15 +41,14 @@ public class AdresseDao implements IAdresseDao {
 
 	@Override
 	public List<Adresse> getAll() throws Exception {
-		//Session session = HibernateConnector.getSession();
-//		Query<Adresse> query = session.createQuery("FROM Adresse a", Adresse.class);
-//		
-//		List<Adresse> adresses = query.list();
-//		
-//		if (session != null && session.isOpen())
-//			session.close();
-//		return adresses;
-		return null;
+		Session session = HibernateConnector.getsession();
+		Query<Adresse> query = session.createQuery("FROM Adresse a", Adresse.class);
+		
+		List<Adresse> adresses = query.list();
+		
+		if (session != null && session.isOpen())
+			session.close();
+		return adresses;
 	}
 
 }

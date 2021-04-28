@@ -16,6 +16,8 @@
 		<property name="hibernate.charset">UTF-8</property>
 		<mapping class="fr.doranco.livretout.entity.Article"></mapping>
 		<mapping class="fr.doranco.livretout.entity.Category"></mapping>
+		<mapping class="fr.doranco.livretout.entity.User"></mapping>
+		<mapping class="fr.doranco.livretout.entity.Adresse"></mapping>
 	
 	</session-factory>
 </hibernate-configuration>

@@ -1,60 +1,38 @@
 package fr.doranco.livretout.main;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import fr.doranco.livretout.control.ArticleMetier;
 import fr.doranco.livretout.dao.AdresseDao;
-import fr.doranco.livretout.dao.ArticleDao;
-import fr.doranco.livretout.dao.CategoryDao;
-import fr.doranco.livretout.entity.Article;
-import fr.doranco.livretout.entity.Category;
+import fr.doranco.livretout.dao.UserDao;
+import fr.doranco.livretout.entity.Adresse;
+import fr.doranco.livretout.entity.User;
 
 public class Main {
-	
-
-	private static final ArticleMetier articleMetier = new ArticleMetier();
-	private static final ArticleDao articleDao = new ArticleDao();
-	private static final CategoryDao categoryDao = new CategoryDao();
 
 	public static void main(String[] args) {
 		
-		Category category = new Category();
-		category.setNomCategory("fruits");
-		//category.setArticle(article);
+		User u1 = new User();
+		u1.setNom("PAN");
+		u1.setPrenom("Peter");
+		u1.setEmail("pan@gmail.com");
+
+		Adresse adresse1 = new Adresse();
+		adresse1.setNumero(12);
+		adresse1.setRue("Eugene Masse");
+		adresse1.setVille("Paris");
+		adresse1.setCodePostal("75001");
+		adresse1.setUser(u1);
 		
-		Article article = new Article();
-		article.setIntitule("mirtille");
-		article.setPrix(2);
-		article.setQuantite(1);
-		article.setCategory(category);
-		// il faut absolument call la DAO pour la base, ne pas faire comme ci-dessus
-		//category.getArticles().add(article);
+		u1.getAdresses().add(adresse1);
 		
+		UserDao userDao = new UserDao();
 		
 		try {
-			categoryDao.addCategory(category);
-			System.out.println("categorie ajoutee: " + category.getId());
-			articleDao.addArticle(article);
-			System.out.println("article ajoute: " + article.getId());
-			
+			userDao.add(u1);
+			System.out.println("User ajoute : " + u1.getId());
+			System.out.println("Adresse ajoute : " + adresse1.getId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-//		
-//		try {
-//			List<Article>articles = articleDao.getArticlesAll();
-//			System.out.println("la liste des articles: " + articles);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}		
-		
-		
-
 	}
 
 }

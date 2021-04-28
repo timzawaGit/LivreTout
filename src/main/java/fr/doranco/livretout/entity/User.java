@@ -33,15 +33,15 @@ public class User implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Integer id;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "nom", length = 25, nullable = false)
 	private String nom;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "prenom", length = 25, nullable = false)
 	private String prenom;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "email", nullable = false)
 	@Size(min = 5, max = 20, message = "Le Email doit être compris entre 5 et 20 caractères")
 	private String email;
