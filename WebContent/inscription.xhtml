@@ -34,6 +34,13 @@
 				requiredMessage="L' email est obligatoire">
 			</h:inputText>
 			<h:message for="email" style="color:red"></h:message>
+			
+			<h:outputText value="Mot de passe : (compris entre 6 et 20 caractères)"></h:outputText>
+			<h:inputText id="password" label="Mot de passe :" size="20"
+				value="#{userBean.password}" required="true"
+				requiredMessage="Le mot de passe est obligatoire">
+			</h:inputText>
+			<h:message for="password" style="color:red"></h:message>
 		</h:panelGrid>
 		<hr></hr>
 		<p>Information concernant votre adresse : </p>

@@ -12,10 +12,19 @@
 </h:head>
 <body>
 
+	<h1>Bienvenue sur LivreTout</h1>
+	<p>Vos courses à toute heure même pendant le couvre feu !</p>
+	
+	<p>Pour profiter de notre sélection d'articles, veuillez vous connectez</p>
 	<h:form>
 		<p>
+			<h:commandLink action="login">
+				<h:outputText value="Je me connecte"></h:outputText>
+			</h:commandLink>
+		</p>
+		<p>
 			<h:commandLink action="inscription">
-				<h:outputText value="Cliquez ici pour vous inscrire..."></h:outputText>
+				<h:outputText value="Je n'ai pas de compte, je veux m'inscrire..."></h:outputText>
 			</h:commandLink>
 		</p>
 	</h:form>

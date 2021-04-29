@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedProperty;
 
 import fr.doranco.livretout.control.IUserMetier;
 import fr.doranco.livretout.control.UserMetier;
+import fr.doranco.livretout.dto.AdresseDto;
+import fr.doranco.livretout.dto.UserDto;
 import fr.doranco.livretout.entity.Adresse;
 import fr.doranco.livretout.entity.User;
 
@@ -35,6 +37,9 @@ public class UserBean implements Serializable {
 	@ManagedProperty(name = "email", value = "")
 	private String email;
 	
+	@ManagedProperty(name = "password", value = "")
+	private String password;
+	
 	
 	// partie adresse 
 	@ManagedProperty(name = "numero", value = "")
@@ -59,26 +64,22 @@ public class UserBean implements Serializable {
 	}
 	
 	public String save() {
-		User user = new User();
-		Adresse adresse = new Adresse();
+		UserDto user = new UserDto();
+		AdresseDto adresse = new AdresseDto();
 		
 		user.setNom(nom);
 		user.setPrenom(prenom);
 		user.setEmail(email);
+		user.setPassword(password);
 		adresse.setNumero(numero);
 		adresse.setRue(rue);
 		adresse.setVille(ville);
 		adresse.setCodePostal(codePostal);
-		adresse.setUser(user);
 		user.getAdresses().add(adresse);
 		
 		try {
 			userMetier.add(user);
-			if (user.getId() > 0) {
-				System.out.println("User bien ajouté");
-				return "success?faces-redirect=true";
-				
-			}
+			return "success?faces-redirect=true";
 			
 		} catch (Exception e) {
 			messageError = "Erreur lors de l'inscription de l'utilisateur !\n" + e.getMessage();
@@ -181,6 +182,16 @@ public class UserBean implements Serializable {
 	public void setMessageError(String messageError) {
 		this.messageError = messageError;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
 
 	
 	
