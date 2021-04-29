@@ -67,14 +67,14 @@ public class UserBean implements Serializable {
 		UserDto user = new UserDto();
 		AdresseDto adresse = new AdresseDto();
 		
-		user.setNom(nom);
-		user.setPrenom(prenom);
-		user.setEmail(email);
-		user.setPassword(password);
+		user.setNom(nom.trim());
+		user.setPrenom(prenom.trim());
+		user.setEmail(email.trim());
+		user.setPassword(password.trim());
 		adresse.setNumero(numero);
-		adresse.setRue(rue);
-		adresse.setVille(ville);
-		adresse.setCodePostal(codePostal);
+		adresse.setRue(rue.trim());
+		adresse.setVille(ville.trim());
+		adresse.setCodePostal(codePostal.trim());
 		user.getAdresses().add(adresse);
 		
 		try {

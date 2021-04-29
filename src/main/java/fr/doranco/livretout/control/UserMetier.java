@@ -33,9 +33,9 @@ public class UserMetier implements IUserMetier {
 		
 		// Set non formatting data
 		User user = new User();
-		user.setNom(userDto.getNom());
-		user.setPrenom(userDto.getPrenom());
-		user.setEmail(userDto.getEmail());
+		user.setNom(userDto.getNom().trim());
+		user.setPrenom(userDto.getPrenom().trim());
+		user.setEmail(userDto.getEmail().trim());
 		
 		// Set formatting data
 		SecretKey secretKey = GenerateKey.getKey(AlgoCryptage.DES.toString(), 56);
@@ -47,9 +47,9 @@ public class UserMetier implements IUserMetier {
 			for (AdresseDto adressDto : userDto.getAdresses()) {
 				Adresse adresse = new Adresse();
 				adresse.setNumero(adressDto.getNumero());
-				adresse.setRue(adressDto.getRue());
-				adresse.setVille(adressDto.getVille());
-				adresse.setCodePostal(adressDto.getCodePostal());
+				adresse.setRue(adressDto.getRue().trim());
+				adresse.setVille(adressDto.getVille().trim());
+				adresse.setCodePostal(adressDto.getCodePostal().trim());
 				adresse.setUser(user);
 				user.getAdresses().add(adresse);
 			}
@@ -71,14 +71,14 @@ public class UserMetier implements IUserMetier {
 			throw new IllegalArgumentException("Des paramètres manquent pour se connecter !");
 		}
 		
-		User user = userDao.getUserByEmail(email);
+		User user = userDao.getUserByEmail(email.trim());
 		
 		if (user != null) {
 			// Decode password
 			SecretKeySpec skey = new SecretKeySpec(user.getCleCryptage(), AlgoCryptage.DES.toString());
 			String passwordDecoded = CryptageDES.decrypt(user.getPassword(), skey);
 			
-			if (passwordDecoded.equals(password)) {
+			if (passwordDecoded.equals(password.trim())) {
 				return user;
 			}
 		}
