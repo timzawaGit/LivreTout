@@ -8,5 +8,6 @@ public interface IUserDao {
 
 	void add(User user) throws Exception;
 	List<User> getAll() throws Exception;
+	User getUserByEmail(String email) throws Exception;
 	
 }

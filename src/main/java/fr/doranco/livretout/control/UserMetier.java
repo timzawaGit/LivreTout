@@ -3,6 +3,7 @@ package fr.doranco.livretout.control;
 import java.util.List;
 
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import fr.doranco.livretout.control.cryptage.algo.CryptageDES;
 import fr.doranco.livretout.control.cryptage.keys.GenerateKey;
@@ -61,6 +62,28 @@ public class UserMetier implements IUserMetier {
 	@Override
 	public List<User> getAll() throws Exception {
 		return userDao.getAll();
+	}
+
+	@Override
+	public User toLogin(String email, String password) throws Exception {
+		if (email == null || email.trim().isEmpty() 
+				|| password == null || password.trim().isEmpty()) {
+			throw new IllegalArgumentException("Des paramètres manquent pour se connecter !");
+		}
+		
+		User user = userDao.getUserByEmail(email);
+		
+		if (user != null) {
+			// Decode password
+			SecretKeySpec skey = new SecretKeySpec(user.getCleCryptage(), AlgoCryptage.DES.toString());
+			String passwordDecoded = CryptageDES.decrypt(user.getPassword(), skey);
+			
+			if (passwordDecoded.equals(password)) {
+				return user;
+			}
+		}
+		
+		return null;
 	}
 
 }

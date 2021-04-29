@@ -9,4 +9,5 @@ public interface IUserMetier {
 
 	void add(UserDto userDto) throws Exception;
 	List<User> getAll() throws Exception;
+	User toLogin(String email, String password) throws Exception;
 }

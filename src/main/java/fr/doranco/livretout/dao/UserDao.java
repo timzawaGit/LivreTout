@@ -43,4 +43,15 @@ public class UserDao implements IUserDao {
 		return users;
 	}
 
+	@Override
+	public User getUserByEmail(String email) throws Exception {
+		Session session = HibernateConnector.getsession();
+		Query<User> query = session.createQuery("FROM User u WHERE u.email = :email", User.class);
+		query.setParameter("email", email);
+		User user = (User) query.getSingleResult();
+		if (session != null && session.isOpen())
+			session.close();
+		return user;
+	}
+
 }
