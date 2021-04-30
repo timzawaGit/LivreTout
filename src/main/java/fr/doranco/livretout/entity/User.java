@@ -92,8 +92,8 @@ public class User implements Serializable {
 //	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 //	private List<Commande> commandes;
 //	
-//	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-//	private List<Commentaire> commentaires;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Commentaire> commentaires;
 //	
 //	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 //	private List<ArticlePanier> panier;
@@ -104,6 +104,8 @@ public class User implements Serializable {
 //		cartes = new ArrayList<CartePaiement>();
 //		commandes = new ArrayList<Commande>();
 //		panier = new ArrayList<ArticlePanier>();
+		commentaires = new ArrayList<Commentaire>();
+		
 	}
 	
 	
@@ -115,6 +117,7 @@ public class User implements Serializable {
 	this.prenom = prenom;
 	this.email = email;
 	adresses = new ArrayList<Adresse>();
+	commentaires = new ArrayList<Commentaire>();
 }
 
 

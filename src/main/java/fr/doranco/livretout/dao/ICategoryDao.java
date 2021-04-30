@@ -9,11 +9,15 @@ public interface ICategoryDao {
 	
 	//CRUD
 	
-	Category addCategory(Category category) throws SQLException;
-	Category getArticles (Integer id) throws SQLException;
+	Category addCategory(Category category) throws Exception;
+	Category getCategory (Integer id) throws Exception;
 	// ou bien afficher la liste des article
-	List<Category> getCategoryAll() throws SQLException;
-	void updateCategory (Integer id)throws SQLException;
-	void removeCategory(Integer id)throws SQLException;
+	List<Category> getCategoryAll() throws Exception;
+	
+	//
+	void updateCategory (Category category)throws Exception;
+	//void removeCategory(Integer id)throws Exception;
+	// je fais la mehode remove avec Category comme parametre car avec le id, je ne suis pas sur
+	void removeCategory(Category category)throws Exception;
 
 }

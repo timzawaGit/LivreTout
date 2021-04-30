@@ -2,103 +2,110 @@ package fr.doranco.livretout.dao;
 
 import java.util.List;
 
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import fr.doranco.livretout.entity.Adresse;
+import fr.doranco.livretout.entity.Commentaire;
 import fr.doranco.livretout.hibernate.connector.HibernateConnector;
 
-public class AdresseDao implements IAdresseDao {
+public class CommentaireDao implements ICommentaireDao {
 	
 	
 
-	public AdresseDao() {
+	public CommentaireDao() {
+		
 	}
 
+
 	@Override
-	public void add(Adresse adresse) throws Exception {
+	public Commentaire addCommentaire(Commentaire commentaire) throws Exception {
+		
 		Session session = null;
 		Transaction tx = null;
 		try {
 			session = HibernateConnector.getsession();
-			tx = session.beginTransaction();
-			session.save(adresse);
+			tx= session.beginTransaction();
+			session.save(commentaire);
 			tx.commit();
-		} catch (Exception e) {
-			if (tx != null)
+		} catch(Exception e) {
+			if(tx!=null)
 				tx.rollback();
 			e.printStackTrace();
 		} finally {
-			if (session != null && session.isOpen())
+			if(session!=null&& session.isOpen())
 				session.close();
 		}
 		
+		return commentaire;
+	}
+	
+
+	@Override
+	public Commentaire getCommentaire(Integer id) throws Exception {
+
+		Session session = HibernateConnector.getsession();
+		Commentaire commentaire = session.get(Commentaire.class, id);
 		
-		
+	
+		if (session != null && session.isOpen())
+			session.close();
+		return commentaire;
 	}
 
 	@Override
-	public List<Adresse> getAll() throws Exception {
+	public List<Commentaire> getCommentaireAll() throws Exception {
 		Session session = HibernateConnector.getsession();
-		Query<Adresse> query = session.createQuery("FROM Adresse a", Adresse.class);
-		
-		List<Adresse> adresses = query.list();
+		Query<Commentaire> query = session.createQuery("From Commentaire cm", Commentaire.class );
+		List<Commentaire> commentaires = query.list();
 		
 		if (session != null && session.isOpen())
 			session.close();
-		return adresses;
+		return commentaires;
 	}
 
-	@Override
-	public Adresse getAdresse(Integer id) throws Exception {
-		Session session = HibernateConnector.getsession();
-		Adresse adresse = session.get(Adresse.class, id);
-		
-		if (session != null && session.isOpen())
-			session.close();
-		return adresse;
-	}
 
 	@Override
-	public void update(Adresse adresse) throws Exception {
+	public void updateCommentaire(Commentaire commentaire) throws Exception {
 		Session session = null;
 		Transaction tx = null;
 		
 		try {
 			session = HibernateConnector.getsession();
 			tx = session.beginTransaction();
-			session.update(adresse);
+			session.update(commentaire);
 			tx.commit();
 		} catch(Exception ex) {
 			tx.rollback();
 			ex.printStackTrace();
 		} finally {
-			if (session != null && session.isOpen())
+			if(session!=null && session.isOpen())
 				session.close();
 		}
 		
 	}
 
+
 	@Override
-	public void remove(Adresse adresse) throws Exception {
+	public void removeCommentaire(Commentaire commentaire) throws Exception {
 		Session session = null;
 		Transaction tx = null;
 		
 		try {
 			session = HibernateConnector.getsession();
 			tx = session.beginTransaction();
-			session.remove(adresse);
+			session.remove(commentaire);
 			tx.commit();
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			tx.rollback();
 			ex.printStackTrace();
 		} finally {
-			if (session != null && session.isOpen())
+			if(session != null && session.isOpen())
 				session.close();
 		}
 		
 	}
+
+	
 
 }

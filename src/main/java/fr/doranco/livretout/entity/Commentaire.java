@@ -28,9 +28,9 @@ public class Commentaire implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Integer id;
 	
-	@NotEmpty
+	
 	@Column(name = "texte", nullable = false)
-	@Size(min = 5, max = 300, message = "Le texte doit être compris entre 5 et 300 caractères")
+//	@Size(min = 5, max = 300, message = "Le texte doit être compris entre 5 et 300 caractères")
 	private String texte;
 	
 	@NotNull
@@ -51,7 +51,7 @@ public class Commentaire implements Serializable {
 	
 
 	public Commentaire(
-			@NotEmpty @Size(min = 5, max = 300, message = "Le texte doit être compris entre 5 et 300 caractères") String texte,
+			 @Size(min = 5, max = 300, message = "Le texte doit être compris entre 5 et 300 caractères") String texte,
 			@NotNull Float note, User user, Article article) {
 		super();
 		this.texte = texte;

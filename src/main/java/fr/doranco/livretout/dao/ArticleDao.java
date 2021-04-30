@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import fr.doranco.livretout.entity.Article;
+import fr.doranco.livretout.entity.Category;
 import fr.doranco.livretout.hibernate.connector.HibernateConnector;
 
 public class ArticleDao implements IArticleDao {
@@ -77,7 +79,7 @@ public class ArticleDao implements IArticleDao {
 	}
 
 	@Override
-	public Article getArticles(Integer id) throws SQLException {
+	public Article getArticle(Integer id) throws Exception {
 		
 		// pas sur du tout de ce code
 		//??????
@@ -85,59 +87,127 @@ public class ArticleDao implements IArticleDao {
 //		LivreToutDataSource ds = new LivreToutDataSource();
 //		Connection connexion = ds.getConnection();
 		
-		Connection connexion = LivreToutDataSource.getInstance().getConnection();
 		
-		String requete = "SELECT FROM article WHERE id=?";
-			
-		PreparedStatement ps =  connexion.prepareStatement(requete);
-		ps.setInt(1,id);
-		ResultSet rs = ps.executeQuery();
-		Article article = null;
-		if(rs.next()) {
-		article = new Article();
-		article.setId(rs.getInt("id"));
-		article.setIntitule(rs.getString("intitule"));
-		article.setPrix(rs.getInt("prix"));
-		article.setQuantite(rs.getInt("quantite"));
-		}
+		// approche ss hibernate les 14 lignes ci-dessous
 		
+//		Connection connexion = LivreToutDataSource.getInstance().getConnection();
+//		
+//		String requete = "SELECT FROM article WHERE id=?";
+//			
+//		PreparedStatement ps =  connexion.prepareStatement(requete);
+//		ps.setInt(1,id);
+//		ResultSet rs = ps.executeQuery();
+//		Article article = null;
+//		if(rs.next()) {
+//		article = new Article();
+//		article.setId(rs.getInt("id"));
+//		article.setIntitule(rs.getString("intitule"));
+//		article.setPrix(rs.getInt("prix"));
+//		article.setQuantite(rs.getInt("quantite"));
+//		}
+//		
+//		return article;
+		
+		
+		Session session = HibernateConnector.getsession();
+		Article article = session.get(Article.class, id);
+		
+		// les 3 lignes ci-dessous correspondent a la ligne de dessus
+//		Query q2 = session.createQuery("FROM Category c WHERE c.id = :id", Category.class);
+//		q2.setParameter("id", id);
+//		Category c2 =(Category) q2.getSingleResult();
+		
+		if (session != null && session.isOpen())
+			session.close();
 		return article;
+		
+		
 	}
 
 	@Override
-	public List<Article> getArticlesAll() throws SQLException {
+	public List<Article> getArticlesAll() throws Exception {
 		
-		Connection connexion = LivreToutDataSource.getInstance().getConnection();
+		Session session = HibernateConnector.getsession();
+		Query<Article> query = session.createQuery("FROM Article u", Article.class);
 		
-		String requete = "SELECT * FROM article";
+		List<Article> articles = query.list();
 		
-		PreparedStatement ps =  connexion.prepareStatement(requete);
-		ResultSet rs = ps.executeQuery();
-		List<Article> articles = new ArrayList<Article>();
-		while(rs.next()) {
-		Article article =new Article();
-		article.setId(rs.getInt("id"));
-		article.setIntitule(rs.getString("intitule"));
-		article.setPrix(rs.getInt("prix"));
-		article.setQuantite(rs.getInt("quantite"));
-		articles.add(article);
-		}
-		
-		
+		if (session != null && session.isOpen())
+			session.close();
 		return articles;
 	}
 
 	@Override
-	public void updateArticle(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
+	public void updateArticle(Article article) throws Exception {
+
+		Session session = null;
+		Transaction tx = null;
+		
+		try {
+		session = HibernateConnector.getsession();
+		tx = session.beginTransaction();
+		session.update(article);
+		tx.commit();
+		} catch (Exception ex){
+			if (tx != null)
+				tx.rollback();
+			ex.printStackTrace();	
+		} finally {
+			if (session != null && session.isOpen())
+				session.close();
+		}
 		
 	}
 
 	@Override
-	public void removeArticle(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
+	public void removeArticle(Article article) throws Exception {
+		Session session =null;
+		Transaction tx = null;
+		
+		try {
+			session = HibernateConnector.getsession();
+			tx = session.beginTransaction();
+			session.remove(article);
+			tx.commit();
+		} catch(Exception ex) {
+			if (tx != null)
+				tx.rollback();
+			ex.printStackTrace();
+		} finally {
+			if(session!=null && session.isOpen());
+			session.close();
+				
+		}
 		
 	}
+		
+		
+		// Methode sans hibernate
+		
+//		Connection connexion = LivreToutDataSource.getInstance().getConnection();
+//		
+//		String requete = "SELECT * FROM article";
+//		
+//		PreparedStatement ps =  connexion.prepareStatement(requete);
+//		ResultSet rs = ps.executeQuery();
+//		List<Article> articles = new ArrayList<Article>();
+//		while(rs.next()) {
+//		Article article =new Article();
+//		article.setId(rs.getInt("id"));
+//		article.setIntitule(rs.getString("intitule"));
+//		article.setPrix(rs.getInt("prix"));
+//		article.setQuantite(rs.getInt("quantite"));
+//		articles.add(article);
+//		}
+//		
+//		
+//		return articles;
+	
+
+	
+
+
+	
 	
 	
 

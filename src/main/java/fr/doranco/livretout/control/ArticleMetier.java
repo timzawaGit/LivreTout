@@ -28,9 +28,9 @@ public class ArticleMetier implements IArticleMetier {
 	}
 
 	@Override
-	public Article getArticles(Integer id) throws Exception {
+	public Article getArticle(Integer id) throws Exception {
 		
-		return articleDao.getArticles(id);
+		return articleDao.getArticle(id);
 	}
 
 	@Override
@@ -41,15 +41,18 @@ public class ArticleMetier implements IArticleMetier {
 
 	// update avec le id ou article en parametre ??
 	@Override
-	public void updateArticle(Integer id) throws Exception {
-		articleDao.updateArticle(id);
+	public void updateArticle(Article article) throws Exception {
+		articleDao.updateArticle(article);
 		
 	}
 
 	@Override
-	public void removeArticle(Integer id) throws Exception {
-		articleDao.removeArticle(id);
+	public void removeArticle(Article article) throws Exception {
+		articleDao.removeArticle(article);
 		
 	}
+
+
+
 
 }

@@ -1,12 +1,18 @@
 package fr.doranco.livretout.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -39,8 +45,11 @@ public class Article {
 	@Column(name = "quantite", length=8, nullable = false)
 	private Integer quantite;
 	
-	@Column(name = "commentaire", length=45, nullable = false)
-	private String commentaire;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "article", fetch = FetchType.LAZY)
+	private List<Commentaire> commentaires;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="category_id",nullable = false )
@@ -48,17 +57,20 @@ public class Article {
 	
 	public Article() {
 		
+		// on doit instancier une liste ds le constructeur (mm vide) sinon on ne pourra pas la remplir
+		commentaires = new ArrayList<Commentaire>();
+		
 	}
 
-	// constructeur avec les champs
-	public Article( String intitule, String description, @NotNull Integer prix, @NotNull Integer quantite, String commentaire) {
+	// constructeur avec les champs (mais mieux vaut ne pas mettre en parametre une liste)
+	public Article( String intitule, String description, @NotNull Integer prix , @NotNull Integer remise, @NotNull Integer quantite ) {
 		super();
 		this.intitule = intitule;
 		this.description = description;
 		this.prix = prix;
 		this.remise = remise;
 		this.quantite = quantite;
-		this.commentaire = commentaire;
+		commentaires = new ArrayList<Commentaire>();
 		
 	}
 	
@@ -112,13 +124,6 @@ public class Article {
 		this.description = description;
 	}
 
-	public String getCommentaire() {
-		return commentaire;
-	}
-
-	public void setCommentaire(String commentaire) {
-		this.commentaire = commentaire;
-	}
 
 	public Integer getRemise() {
 		return remise;
@@ -128,7 +133,9 @@ public class Article {
 		this.remise = remise;
 	}
 	
-	
+	public List<Commentaire> getCommentaires() {
+		return commentaires;
+	}
 	
 	
 
