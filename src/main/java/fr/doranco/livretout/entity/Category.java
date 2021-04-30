@@ -26,7 +26,7 @@ public class Category {
 	private Integer id;
 	
 	
-	@Column(name = "nomCategory", length=45, nullable = false)
+	@Column(name = "nom_category", length=45, nullable = false)
 	private String nomCategory;
 	
 	@NotNull
