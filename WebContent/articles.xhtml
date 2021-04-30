@@ -12,33 +12,26 @@
 	<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
 </h:head>
 <body>
-	<h1>Hello  ?</h1>
+	
 	
 <h1>AJOUTER UN NOUVEL ARTICLE</h1>
 	<h:form>
 		<h:panelGrid columns="3" cellpadding="0" cellspacing="2">
 			
-			<h:outputText value="Id :"></h:outputText>
-			<h:inputText id="idUser" size="11" disabled="true" style="color:blue"
-				value="#{articleBean.id}" >
-			</h:inputText>
-			
-			
-			<h:message for="idUser" style="color:red"></h:message>
 			
 			<h:outputText value="Intitule :"></h:outputText>
 			<h:inputText id="nom" size="20"
 				value="#{articleBean.intitule}" required="true"
 				requiredMessage="Le Nom est obligatoire">
 			</h:inputText>
-			<h:message for="Intitule" style="color:red"></h:message>
+			<h:message for="nom" style="color:red"></h:message>
 			
 			<h:outputText value="Description :"></h:outputText>
 			<h:inputText id="description" size="20"
 				value="#{articleBean.description}" required="true"
 				requiredMessage="Le Prenom est obligatoire">
 			</h:inputText>
-			<h:message for="prenom" style="color:red"></h:message>
+			<h:message for="description" style="color:red"></h:message>
 			
 			<h:outputText value="Prix :"></h:outputText>
 			<h:inputText id="prix" size="20"
@@ -49,37 +42,29 @@
 
 			<h:outputText value="Remise :"></h:outputText>
 			<h:inputText id="remise" size="20"
-				value="#{articleBean.remise}" required="true"
-				requiredMessage="Le Prénom est obligatoire">
+				value="#{articleBean.remise}" >
 			</h:inputText>
-			<h:message for="password" style="color:red"></h:message>
+			<h:message for="remise" style="color:red"></h:message>
 			
 			<h:outputText value="Quantite :"></h:outputText>
 			<h:inputText id="quantite" size="20"
 				value="#{articleBean.quantite}" required="true"
-				requiredMessage="Le Prénom est obligatoire">
+				requiredMessage="La quantite est obligatoire">
 			</h:inputText>
+			<h:message for="quantite" style="color:red"></h:message>
 			
-				<h:outputText value="Category :"></h:outputText>
-			<h:inputText id="category" size="20"
-				value="#{articleBean.category}" required="true"
-				requiredMessage="Le Prénom est obligatoire">
-			</h:inputText>
+				
 
 		</h:panelGrid>
 		<p></p>
 		<h:panelGrid columns="3" cellpadding="10" cellspacing="0">
 			<h:commandButton id="ajouterArticle" value="Ajouter article"
-				action="#{articleBean.addArticle(a)}"></h:commandButton>
+				action="#{articleBean.save()}"></h:commandButton>
 			
-			<h:commandButton id="montrerArticle" value="montrer article"
-				action="#{articleBean.getArticlesAll()}"></h:commandButton>
 			
 				
 		</h:panelGrid>
 		<p>
-			<h:outputText value="#{articleBean.messageSuccess}" style="color:green"></h:outputText>
-			<h:outputText value="#{articleBean.messageError}" style="color:red"></h:outputText>
 		</p>
 		
 	</h:form>

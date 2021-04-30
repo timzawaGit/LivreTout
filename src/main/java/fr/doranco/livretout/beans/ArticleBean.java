@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 
 import fr.doranco.livretout.control.ArticleMetier;
 import fr.doranco.livretout.control.IArticleMetier;
+import fr.doranco.livretout.dto.ArticleDto;
 import fr.doranco.livretout.entity.Article;
 import fr.doranco.livretout.entity.Category;
 
@@ -17,7 +18,9 @@ public class ArticleBean implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
+	
 	private final IArticleMetier articleMetier = new ArticleMetier();
+	private final ArticleDto articleDto = new ArticleDto();
 	
 	
 	@ManagedProperty(name="id", value="")
@@ -42,85 +45,32 @@ public class ArticleBean implements Serializable {
 	@ManagedProperty(name="quantite", value="")
 	private String quantite;
 	
-	
-	@ManagedProperty(name="category_id", value="")
-	private Category category;
-	
-	
-	
-	@ManagedProperty(name = "messageSuccess", value = "")
-	private static String messageSuccess;
-	
-	@ManagedProperty(name = "messageError", value = "")
-	private static String messageError;
-	
-	static {
-		messageSuccess = "";
-		messageError = "";
-	}
-	
+// category
 
 	public ArticleBean() {
 	}
 	
-//	public String save() {
-//		UserDto user = new UserDto();
-//		AdresseDto adresse = new AdresseDto();
-//		
-//		user.setNom(nom.trim());
-//		user.setPrenom(prenom.trim());
-//		user.setEmail(email.trim());
-//		user.setPassword(password.trim());
-//		adresse.setNumero(numero);
-//		adresse.setRue(rue.trim());
-//		adresse.setVille(ville.trim());
-//		adresse.setCodePostal(codePostal.trim());
-//		user.getAdresses().add(adresse);
-//		
-//		try {
-//			userMetier.add(user);
-//			return "success?faces-redirect=true";
-//			
-//		} catch (Exception e) {
-//			messageError = "Erreur lors de l'inscription de l'utilisateur !\n" + e.getMessage();
-//		}
-//		
-//		return "";
-//	}
-//	
-	public String addArticle() {
-		Article article = new Article();
-		Category category = new Category();
-		article.setIntitule(intitule);
-		article.setPrix(prix);
-		article.setDescription(description);
-		article.setRemise(remise);
-		article.setQuantite(quantite);
-		article.setCategory(category);
-		
-		try {
-			articleMetier.addArticle(article);
-			messageSuccess = "Ajout d'article reussi";
+	    public String save() {
+	    articleDto.setIntitule(intitule.trim());
+	    articleDto.setDescription(description.trim());
+	    articleDto.setPrix(prix.trim());
+	    articleDto.setRemise(remise.trim());
+	    articleDto.setQuantite(quantite.trim());
+	    System.out.println("on a passe les argument" +articleDto.getPrix());
+	    
+	    
+	    try {
+			articleMetier.add(articleDto);
+			System.out.println("ajout d'article reussi");
 		} catch (Exception e) {
-			System.out.println(e);
-			messageError ="Erreur lors de l'ajout de votre article \n" + e.getMessage();
+		
+			e.printStackTrace();
+			System.out.println("Erreur :" +e.getMessage());
 		}
-		return "";
-	}
+	    return "";
+	    }
+		
 	
-	public List<Article>getArticlesAll(){
-		try {
-			List<Article> articles = articleMetier.getArticlesAll();
-		if (articles!=null)
-		return articles;
-	} catch (Exception e) {
-		messageError ="Erreur lors de la recup des articles"; 
-	}
-		return new ArrayList<Article>();
-	
-	
-
-}
 
 	public int getId() {
 		return id;
@@ -146,37 +96,31 @@ public class ArticleBean implements Serializable {
 		this.description = description;
 	}
 
-	public int getPrix() {
+	public String getPrix() {
 		return prix;
 	}
 
-	public void setPrix(int prix) {
+	public void setPrix(String prix) {
 		this.prix = prix;
 	}
 
-	public int getRemise() {
+	public String getRemise() {
 		return remise;
 	}
 
-	public void setRemise(int remise) {
+	public void setRemise(String remise) {
 		this.remise = remise;
 	}
 
-	public int getQuantite() {
+	public String getQuantite() {
 		return quantite;
 	}
 
-	public void setQuantite(int quantite) {
+	public void setQuantite(String quantite) {
 		this.quantite = quantite;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+	
 	
 }
 	

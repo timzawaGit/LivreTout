@@ -3,6 +3,8 @@ package fr.doranco.livretout.control;
 import java.sql.SQLException;
 import java.util.List;
 
+import fr.doranco.livretout.dto.ArticleDto;
+import fr.doranco.livretout.dto.CategoryDto;
 import fr.doranco.livretout.entity.Article;
 
 public interface IArticleMetier {
@@ -15,5 +17,7 @@ public interface IArticleMetier {
 			List<Article> getArticlesAll() throws Exception;
 			void updateArticle (Article article)throws Exception;
 			void removeArticle(Article article)throws Exception;
+			
+			void add(ArticleDto articleDto) throws Exception;
 
 }
