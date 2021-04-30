@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import fr.doranco.livretout.control.CategoryMetier;
+import fr.doranco.livretout.dto.CategoryDto;
 
 @ManagedBean(name ="categoryBean")
 public class CategoryBean implements Serializable  {
@@ -16,6 +17,8 @@ public class CategoryBean implements Serializable  {
 	private static final long serialVersionUID = 1L;
 
 private final CategoryMetier categoryMetier = new CategoryMetier();
+private final CategoryDto categoryDto = new CategoryDto();
+
 	
 @ManagedProperty(name="id", value="")
 private Integer id;
@@ -31,9 +34,17 @@ private String remise;
 }
 	
 	public String save() {
-		
-		System.out.println(nom);
-		System.out.println(remise);
+	categoryDto.setNom(nom.trim());
+	categoryDto.setRemise(remise.trim());
+		try {
+			categoryMetier.add(categoryDto);
+			System.out.println("Ajout reussi");
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println("Erreur :" +e.getMessage());
+		}
 		return "";
 	}
 	
