@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
+</h:head>
+<body>
+
+	<h1>Bienvenue sur LivreTout</h1>
+	<p>Vos courses à toute heure même pendant le couvre feu !</p>
+	
+	<p>Pour profiter de notre sélection d'articles, veuillez vous connectez</p>
+	<h:form>
+		<p>
+			<h:commandLink action="login">
+				<h:outputText value="Je me connecte"></h:outputText>
+			</h:commandLink>
+		</p>
+		<p>
+			<h:commandLink action="inscription">
+				<h:outputText value="Je n'ai pas de compte, je veux m'inscrire..."></h:outputText>
+			</h:commandLink>
+		</p>
+	</h:form>
+		
+		
+	
+
+
+</body>
+
+</html>

@@ -46,14 +46,14 @@ public class User implements Serializable {
 	@Size(min = 5, max = 20, message = "Le Email doit être compris entre 5 et 20 caractères")
 	private String email;
 	
-//	@NotEmpty
-//	@Column(name = "password", nullable = false)
-//	@Size(min = 6, max = 15, message = "Le mot de passe doit être compris entre 6 et 15 caractères")
-//	private byte[] password;
-//	
-//	@NotEmpty
-//	@Column(name = "cle_cryptage", nullable = false)
-//	private byte[] cleCryptage;
+	@NotNull
+	@Column(name = "password", nullable = false)
+	@Size(min = 6, max = 15, message = "Le mot de passe doit être compris entre 6 et 15 caractères")
+	private byte[] password;
+	
+	@NotNull
+	@Column(name = "cle_cryptage", nullable = false)
+	private byte[] cleCryptage;
 //	
 //	@NotEmpty
 //	@Column(name = "isActif", nullable = false)
@@ -160,6 +160,30 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+
+	public byte[] getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(byte[] password) {
+		this.password = password;
+	}
+
+
+
+	public byte[] getCleCryptage() {
+		return cleCryptage;
+	}
+
+
+
+	public void setCleCryptage(byte[] cleCryptage) {
+		this.cleCryptage = cleCryptage;
 	}
 
 	

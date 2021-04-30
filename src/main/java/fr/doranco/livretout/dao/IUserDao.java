@@ -9,8 +9,12 @@ public interface IUserDao {
 	void add(User user) throws Exception;
 	User getUser(Integer id)throws Exception;
 	List<User> getAll() throws Exception;
+
 	void update(User user) throws Exception;
 	void remove(User user) throws Exception;
 	
+
+	User getUserByEmail(String email) throws Exception;
+
 	
 }
