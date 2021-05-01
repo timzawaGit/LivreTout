@@ -1,41 +1,44 @@
 package fr.doranco.livretout.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import fr.doranco.livretout.control.CategoryMetier;
 import fr.doranco.livretout.dto.CategoryDto;
+import fr.doranco.livretout.entity.Category;
 
 @ManagedBean(name ="categoryBean")
 public class CategoryBean implements Serializable  {
 	
-/**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-private final CategoryMetier categoryMetier = new CategoryMetier();
-private final CategoryDto categoryDto = new CategoryDto();
-
+	private final CategoryMetier categoryMetier = new CategoryMetier();
+	private final CategoryDto categoryDto = new CategoryDto();
 	
-@ManagedProperty(name="id", value="")
-private Integer id;
-
-@ManagedProperty(name="nom", value="")
-private String nom;
-
-@ManagedProperty(name="remise", value="")
-private String remise;
+		
+	@ManagedProperty(name="id", value="")
+	private Integer id;
+	
+	@ManagedProperty(name="nom", value="")
+	private String nom;
+	
+	@ManagedProperty(name="remise", value="")
+	private String remise;
 
 	public CategoryBean() {
 	
 }
 	
 	public String save() {
-	categoryDto.setNom(nom.trim());
-	categoryDto.setRemise(remise.trim());
+		categoryDto.setNom(nom.trim());
+		categoryDto.setRemise(remise.trim());
 		try {
 			categoryMetier.add(categoryDto);
 			System.out.println("Ajout reussi");
@@ -47,6 +50,19 @@ private String remise;
 		}
 		return "";
 	}
+	
+	public List<Category> getCategories() {
+		try {
+			List<Category> categories = categoryMetier.getCategoriesAll();
+			if (categories != null) {
+				return categories;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erreur pour récupérer la liste des catégories :" +e.getMessage());
+		}
+		return new ArrayList<Category>();
+    }
 	
 
 	public Integer getId() {

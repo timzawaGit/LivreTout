@@ -8,6 +8,7 @@ public class ArticleDto {
 	private String prix;
 	private String remise;
 	private String quantite;
+	private String category;
 	
 	
 	public ArticleDto() {
@@ -72,6 +73,16 @@ public class ArticleDto {
 
 	public void setQuantite(String quantite) {
 		this.quantite = quantite;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

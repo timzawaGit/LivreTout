@@ -53,6 +53,13 @@
 			</h:inputText>
 			<h:message for="quantite" style="color:red"></h:message>
 			
+			<h:outputText value="Catégorie :"></h:outputText>
+			<h:selectOneMenu value="#{articleBean.category}">
+				<f:selectItems value="#{categoryBean.getCategories()}" var="c"
+					itemLabel="#{c.nomCategory}" itemValue="#{c.nomCategory}"
+				 />
+			</h:selectOneMenu>
+			
 				
 
 		</h:panelGrid>

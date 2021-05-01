@@ -19,5 +19,7 @@ public interface ICategoryDao {
 	//void removeCategory(Integer id)throws Exception;
 	// je fais la mehode remove avec Category comme parametre car avec le id, je ne suis pas sur
 	void removeCategory(Category category)throws Exception;
+	
+	Category getByName(String nomCategory) throws Exception;
 
 }

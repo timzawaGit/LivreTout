@@ -45,32 +45,34 @@ public class ArticleBean implements Serializable {
 	@ManagedProperty(name="quantite", value="")
 	private String quantite;
 	
-// category
+	@ManagedProperty(name = "category", value="")
+	private String category;
 
 	public ArticleBean() {
 	}
 	
-	    public String save() {
+    public String save() {
 	    articleDto.setIntitule(intitule.trim());
 	    articleDto.setDescription(description.trim());
 	    articleDto.setPrix(prix.trim());
 	    articleDto.setRemise(remise.trim());
 	    articleDto.setQuantite(quantite.trim());
+	    articleDto.setCategory(category.trim());
 	    System.out.println("on a passe les argument" +articleDto.getPrix());
 	    
 	    
 	    try {
 			articleMetier.add(articleDto);
-			System.out.println("ajout d'article reussi");
+			System.err.println("ajout d'article reussi");
+			return "success-article?faces-redirect=true";
 		} catch (Exception e) {
 		
 			e.printStackTrace();
-			System.out.println("Erreur :" +e.getMessage());
+			System.err.println("Erreur :" +e.getMessage());
 		}
 	    return "";
-	    }
-		
-	
+    }
+    	
 
 	public int getId() {
 		return id;
@@ -118,6 +120,14 @@ public class ArticleBean implements Serializable {
 
 	public void setQuantite(String quantite) {
 		this.quantite = quantite;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	

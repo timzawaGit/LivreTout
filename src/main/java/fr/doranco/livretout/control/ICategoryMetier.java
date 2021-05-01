@@ -18,4 +18,6 @@ public interface ICategoryMetier {
 	void removeCategory(Category category)throws Exception;
 	
 	void add(CategoryDto categoryDto) throws Exception;
+	
+	Category getByName(String nomCategory) throws Exception;
 }

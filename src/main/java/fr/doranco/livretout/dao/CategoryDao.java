@@ -116,6 +116,21 @@ public class CategoryDao implements ICategoryDao {
 	}
 
 
+	@Override
+	public Category getByName(String nomCategory) throws Exception {
+		Session session = HibernateConnector.getsession();
+		
+		Query<Category> q = session.createQuery("FROM Category c WHERE c.nomCategory = :nom", Category.class);
+		q.setParameter("nom", nomCategory);
+		Category c =(Category) q.getSingleResult();
+		
+		if (session != null && session.isOpen())
+			session.close();
+		
+		return c;
+	}
+
+
 
 
 
