@@ -72,7 +72,14 @@
 				
 		</h:panelGrid>
 		<p>
+			<h:outputText value="#{articleBean.messageSuccess}" style="color:green"></h:outputText>
+			<h:outputText value="#{articleBean.messageError}" style="color:red"></h:outputText>
 		</p>
+		<h:panelGrid>
+			<h:button id="addCategory" value="Ajouter une catégorie" outcome="category.xhtml"></h:button>
+			<h:button id="home" value="Voir articles" outcome="home.xhtml"></h:button>
+			<h:button id="retour" value="Retour vers Accueil" outcome="main.xhtml"></h:button>
+		</h:panelGrid>
 		
 	</h:form>
 	

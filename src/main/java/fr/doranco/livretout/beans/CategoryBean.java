@@ -31,6 +31,12 @@ public class CategoryBean implements Serializable  {
 	
 	@ManagedProperty(name="remise", value="")
 	private String remise;
+	
+	@ManagedProperty(name = "messageSuccess", value = "")
+	private String messageSuccess;
+	
+	@ManagedProperty(name = "messageError", value = "")
+	private String messageError;
 
 	public CategoryBean() {
 	
@@ -41,12 +47,11 @@ public class CategoryBean implements Serializable  {
 		categoryDto.setRemise(remise.trim());
 		try {
 			categoryMetier.add(categoryDto);
-			System.out.println("Ajout reussi");
-			
+			System.err.println("Ajout reussi");
+			return "success-article?faces-redirect=true";
 		} catch (Exception e) {
-			
-			e.printStackTrace();
-			System.out.println("Erreur :" +e.getMessage());
+			System.err.println("Erreur :" +e.getMessage());
+			messageError = "Erreur lors de l'ajout de la catégorie ! --> " + e.getMessage();
 		}
 		return "";
 	}
@@ -89,6 +94,22 @@ public class CategoryBean implements Serializable  {
 
 	public void setRemise(String remise) {
 		this.remise = remise;
+	}
+
+	public String getMessageSuccess() {
+		return messageSuccess;
+	}
+
+	public void setMessageSuccess(String messageSuccess) {
+		this.messageSuccess = messageSuccess;
+	}
+
+	public String getMessageError() {
+		return messageError;
+	}
+
+	public void setMessageError(String messageError) {
+		this.messageError = messageError;
 	}
 	
 	

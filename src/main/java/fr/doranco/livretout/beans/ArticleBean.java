@@ -48,6 +48,12 @@ public class ArticleBean implements Serializable {
 	@ManagedProperty(name = "category", value="")
 	private String category;
 
+	@ManagedProperty(name = "messageSuccess", value = "")
+	private String messageSuccess;
+	
+	@ManagedProperty(name = "messageError", value = "")
+	private String messageError;
+	
 	public ArticleBean() {
 	}
 	
@@ -66,9 +72,8 @@ public class ArticleBean implements Serializable {
 			System.err.println("ajout d'article reussi");
 			return "success-article?faces-redirect=true";
 		} catch (Exception e) {
-		
-			e.printStackTrace();
 			System.err.println("Erreur :" +e.getMessage());
+			messageError = "Erreur lors de l'ajout de l'article ! --> " + e.getMessage();
 		}
 	    return "";
     }
@@ -128,6 +133,22 @@ public class ArticleBean implements Serializable {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getMessageSuccess() {
+		return messageSuccess;
+	}
+
+	public void setMessageSuccess(String messageSuccess) {
+		this.messageSuccess = messageSuccess;
+	}
+
+	public String getMessageError() {
+		return messageError;
+	}
+
+	public void setMessageError(String messageError) {
+		this.messageError = messageError;
 	}
 
 	
