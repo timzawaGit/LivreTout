@@ -77,6 +77,19 @@ public class ArticleBean implements Serializable {
 		}
 	    return "";
     }
+    
+    public List<Article> getAll() {
+    	try {
+			List<Article> articles = articleMetier.getArticlesAll();
+			if (articles != null) {
+				return articles;
+			}
+		} catch (Exception e) {
+			System.err.println("Erreur dans articleBean - getAll --> " +e.getMessage());
+			messageError = "Erreur dans articleBean - getAll --> " + e.getMessage();
+		}
+    	return new ArrayList<Article>();
+    }
     	
 
 	public int getId() {
