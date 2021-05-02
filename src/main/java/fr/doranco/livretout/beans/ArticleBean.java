@@ -45,32 +45,52 @@ public class ArticleBean implements Serializable {
 	@ManagedProperty(name="quantite", value="")
 	private String quantite;
 	
-// category
+	@ManagedProperty(name = "category", value="")
+	private String category;
 
+	@ManagedProperty(name = "messageSuccess", value = "")
+	private String messageSuccess;
+	
+	@ManagedProperty(name = "messageError", value = "")
+	private String messageError;
+	
 	public ArticleBean() {
 	}
 	
-	    public String save() {
+    public String save() {
 	    articleDto.setIntitule(intitule.trim());
 	    articleDto.setDescription(description.trim());
 	    articleDto.setPrix(prix.trim());
 	    articleDto.setRemise(remise.trim());
 	    articleDto.setQuantite(quantite.trim());
+	    articleDto.setCategory(category.trim());
 	    System.out.println("on a passe les argument" +articleDto.getPrix());
 	    
 	    
 	    try {
 			articleMetier.add(articleDto);
-			System.out.println("ajout d'article reussi");
+			System.err.println("ajout d'article reussi");
+			return "success-article?faces-redirect=true";
 		} catch (Exception e) {
-		
-			e.printStackTrace();
-			System.out.println("Erreur :" +e.getMessage());
+			System.err.println("Erreur :" +e.getMessage());
+			messageError = "Erreur lors de l'ajout de l'article ! --> " + e.getMessage();
 		}
 	    return "";
-	    }
-		
-	
+    }
+    
+    public List<Article> getAll() {
+    	try {
+			List<Article> articles = articleMetier.getArticlesAll();
+			if (articles != null) {
+				return articles;
+			}
+		} catch (Exception e) {
+			System.err.println("Erreur dans articleBean - getAll --> " +e.getMessage());
+			messageError = "Erreur dans articleBean - getAll --> " + e.getMessage();
+		}
+    	return new ArrayList<Article>();
+    }
+    	
 
 	public int getId() {
 		return id;
@@ -118,6 +138,30 @@ public class ArticleBean implements Serializable {
 
 	public void setQuantite(String quantite) {
 		this.quantite = quantite;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getMessageSuccess() {
+		return messageSuccess;
+	}
+
+	public void setMessageSuccess(String messageSuccess) {
+		this.messageSuccess = messageSuccess;
+	}
+
+	public String getMessageError() {
+		return messageError;
+	}
+
+	public void setMessageError(String messageError) {
+		this.messageError = messageError;
 	}
 
 	

@@ -23,7 +23,6 @@ public class CategoryMetier implements ICategoryMetier {
 
 	@Override
 	public List<Category> getCategoriesAll() throws Exception {
-		// TODO Auto-generated method stub
 		return categoryDao.getCategoryAll();
 	}
 
@@ -75,6 +74,20 @@ public class CategoryMetier implements ICategoryMetier {
 		}
 			
 			categoryDao.addCategory(category);
+	}
+
+
+
+
+	@Override
+	public Category getByName(String nomCategory) throws Exception {
+		if(nomCategory == null) {
+			throw new NullPointerException("Le nom de la categorie à récupérer est NULL !");
+		}
+		if(nomCategory == null || nomCategory.trim().isEmpty() )
+			throw new IllegalArgumentException("Le nom de la catégorie n'est pas un String ou Manquant !");
+		
+		return categoryDao.getByName(nomCategory.trim());
 	}
 
 

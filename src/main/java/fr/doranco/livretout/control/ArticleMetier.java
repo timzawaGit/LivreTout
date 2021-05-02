@@ -78,9 +78,7 @@ public class ArticleMetier implements IArticleMetier {
 		article.setPrix(Integer.parseInt(articleDto.getPrix()));
 		article.setQuantite(Integer.parseInt(articleDto.getQuantite()));
 		
-		// on donne une categorie pour l'article pour tester
-		Category category = new Category("fruit", 0);
-		categoryDao.addCategory(category);
+		Category category = categoryDao.getByName(articleDto.getCategory().trim());
 		article.setCategory(category);
 		
 		if(articleDto.getRemise()==null || articleDto.getRemise().trim().isEmpty()) {
