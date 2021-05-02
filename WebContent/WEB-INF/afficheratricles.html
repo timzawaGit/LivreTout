@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Afficher article</title>
+</head>
+<body>
+<h:form>
+		<h:panelGrid columns="3" cellpadding="0" cellspacing="2">
+			
+			
+			<h:outputText value="Nom du proprietaire :"></h:outputText>
+			<h:inputText id="nomproprietaire" size="20"
+				value="#{cartePaiementBean.nomproprietaire}" required="true"
+				requiredMessage="Le Nom est obligatoire">
+			</h:inputText>
+			<h:message for="nomproprietaire" style="color:red"></h:message>
+			
+			<h:outputText value="Prenom du proprietaire :"></h:outputText>
+			<h:inputText id="prenomproprietaire" size="20"
+				value="#{cartePaiementBean.prenomproprietaire}" required="true"
+				requiredMessage="Le Prenom est obligatoire">
+			</h:inputText>
+			<h:message for="prenomproprietaire" style="color:red"></h:message>
+			
+			<h:outputText value="Numero :"></h:outputText>
+			<h:inputText id="numero" size="20"
+				value="#{cartePaiementBean.numero}" required="true"
+				requiredMessage="Le numero est obligatoire">
+			</h:inputText>
+			<h:message for="numero" style="color:red"></h:message>
+
+			<h:outputText value="date limite :"></h:outputText>
+			<h:inputText id="datelimite" size="20"
+				value="#{cartePaiementBean.datelimite}" required="true"
+				requiredMessage="La date limite est obligatoire">
+			<!-- <f:convertDateTime pattern="dd-MM-yyyy"/> -->	 
+			</h:inputText>
+			<h:message for="datelimite" style="color:red"></h:message>
+			
+			<h:outputText value="cryptogramme :"></h:outputText>
+			<h:inputText id="cryptogramme" size="20"
+				value="#{cartePaiementBean.cryptogramme}" required="true"
+				requiredMessage="La cryptogramme est obligatoire">
+			</h:inputText>
+			<h:message for="cryptogramme" style="color:red"></h:message>
+			
+				
+
+		</h:panelGrid>
+		<p></p>
+		<h:panelGrid columns="3" cellpadding="10" cellspacing="0">
+			<h:commandButton id="ajouterArticle" value="Ajouter une carte"
+				action="#{cartePaiementBean.save()}"></h:commandButton>
+			
+			
+				
+		</h:panelGrid>
+		<p>
+		</p>
+		
+	</h:form>
+</body>
+</html>

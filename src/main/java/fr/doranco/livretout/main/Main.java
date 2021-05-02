@@ -3,21 +3,30 @@ package fr.doranco.livretout.main;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.crypto.SecretKey;
+
 import fr.doranco.livretout.control.AdresseMetier;
 import fr.doranco.livretout.control.ArticleMetier;
+import fr.doranco.livretout.control.CartePaiementMetier;
 import fr.doranco.livretout.control.CategoryMetier;
 import fr.doranco.livretout.control.CommentaireMetier;
 import fr.doranco.livretout.control.UserMetier;
+import fr.doranco.livretout.control.UserMetier2;
+import fr.doranco.livretout.control.cryptage.algo.CryptageDES;
+import fr.doranco.livretout.control.cryptage.keys.GenerateKey;
 import fr.doranco.livretout.dao.AdresseDao;
 import fr.doranco.livretout.dao.ArticleDao;
+import fr.doranco.livretout.dao.CartePaiementDao;
 import fr.doranco.livretout.dao.CategoryDao;
 import fr.doranco.livretout.dao.CommentaireDao;
 import fr.doranco.livretout.dao.UserDao;
 import fr.doranco.livretout.entity.Adresse;
 import fr.doranco.livretout.entity.Article;
+import fr.doranco.livretout.entity.CartePaiement;
 import fr.doranco.livretout.entity.Category;
 import fr.doranco.livretout.entity.Commentaire;
 import fr.doranco.livretout.entity.User;
+import fr.doranco.livretout.enums.AlgoCryptage;
 
 public class Main {
 	
@@ -27,6 +36,7 @@ public class Main {
 	private static final CategoryMetier categoryMetier = new CategoryMetier();
 	private static final CategoryDao categoryDao = new CategoryDao();
 	
+	private static final UserMetier2 userMetier2 = new UserMetier2();
 	private static final UserMetier userMetier = new UserMetier();
 	private static final UserDao userDao = new UserDao();
 	
@@ -35,8 +45,63 @@ public class Main {
 	
 	private static final CommentaireMetier commentaireMetier = new CommentaireMetier();
 	private static final CommentaireDao commentaireDao = new CommentaireDao();
+	
+	private static final CartePaiementMetier cartePaiementMetier = new CartePaiementMetier();
+	private static final CartePaiementDao cartePaiementDao = new CartePaiementDao();
 
 	public static void main(String[] args) {
+		
+		
+
+		String message= "blabla";
+		
+		 SecretKey secretKey;
+		try {
+			secretKey = GenerateKey.getKey(AlgoCryptage.DES.toString(), 56);
+			String keyString = new String(secretKey.getEncoded());
+			byte[] messageEncrypteEnByte = CryptageDES.encrypt(message, secretKey);
+			User user1 = new User();
+			user1.setNom("tim");
+			user1.setPrenom("zawa");
+			user1.setEmail("tt@gmail.com");
+			user1.setPassword(messageEncrypteEnByte);
+			user1.setCleCryptage(messageEncrypteEnByte);
+			CartePaiement cartePaiement = new CartePaiement();
+			cartePaiement.setNomProprietaire("Phoun");
+			cartePaiement.setPrenomProprietaire("Somaly");
+			cartePaiement.setCleCryptage(messageEncrypteEnByte);
+			cartePaiement.setCryptogramme(messageEncrypteEnByte);
+			cartePaiement.setDateLimite("bbbb");
+			cartePaiement.setNumero(messageEncrypteEnByte);
+			cartePaiement.setUserCarte(user1);
+			userMetier2.add(user1);
+			System.out.println("user ajoute: " + user1.getId());
+			cartePaiementMetier.add(cartePaiement);
+			System.out.println("Carte P ajoutee: " + cartePaiement.getId());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	  	
+		
+	  
+	
+		
+		
+		
+		try {
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+//			System.out.println("article ajoute: " + article.getId());
+//			userDao.add(user1);
+//			System.out.println("user ajoute: " + user1.getId());
+//////			adresseDao.add(adresse1);
+//////			System.out.println("adresse ajoute: " + adresse1.getId());
+//			commentaireDao.addCommentaire(commentaire);
+//			System.out.println("commentaire ajoute: " + commentaire.getId());
 		
 		// c'est ce qu'il y aura sur le bean
 		
@@ -236,15 +301,15 @@ public class Main {
 				
 		
 //		
-		try {
-			List<Article> articles;
-				articles = articleMetier.getArticlesAll();
-				System.out.println("la liste des articles: " + articles);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}		
+//		try {
+//			List<Article> articles;
+//				articles = articleMetier.getArticlesAll();
+//				System.out.println("la liste des articles: " + articles);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}		
 		
 		
 		
@@ -300,4 +365,4 @@ public class Main {
 
 	}
 	
-
+}

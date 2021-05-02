@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -66,6 +68,11 @@ public class User implements Serializable {
 //	@NotEmpty
 //	@Column(name = "date_naissance", nullable = false)
 //	private Date dateNaissance;
+	
+	@NotNull
+	@Column(name = "date_naissance", nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dateNaissance;
 	
 //	@NotEmpty
 //	@Column(name = "telephone", nullable = false)

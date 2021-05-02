@@ -1,67 +1,37 @@
-package fr.doranco.livretout.entity;
-
-import java.util.Date;
-import java.util.List;
+package fr.doranco.livretout.dto;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table (name ="carte_paiement")
-public class CartePaiement {
+import fr.doranco.livretout.entity.User;
+
+public class CartePaiementDto {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
 	private Integer id;
-	
-	@Column(name = "nom_proprietaire", length=45, nullable = false)
 	private String nomProprietaire;
-	
-	@Column(name = "prenom_proprietaire", length=45, nullable = false)
 	private String prenomProprietaire;
-	
-	@NotNull
-	@Column(name = "numero", length=5, nullable = false)
-	private byte[] numero;
-	
-	
-	@Column(name = "date_limite", length=45, nullable = false)
-	//@Temporal(TemporalType.DATE)
+	private String numero;
 	private String dateLimite;
-	
-	
-	@NotNull
-	@Column(name = "cryptogramme", length=5, nullable = false)
-	private byte[] cryptogramme;
-	
-	@NotNull
-	@Column(name = "cle_cryptage", nullable = false)
-	private byte[] cleCryptage;
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+	private String cryptogramme;
+	private String cleCryptage;
+	// je pense : il y a un seul user donc pas de list
 	private User userCarte;
 	
 	
-	// mettre surement une propriete avec enumeration (visa, mastercard etc...)
-	
-	public CartePaiement() {
-	
+	public CartePaiementDto() {
+		// eventuellement on pourrait rajouter une liste ds le constructeur
+		// si on fait un OneToMany ou ManyToMany
 	}
 
 
-	public CartePaiement(String nomProprietaire, String prenomProprietaire, @NotNull byte[] numero, String dateLimite,
-			@NotNull byte[] cryptogramme, @NotNull byte[] cleCryptage, User userCarte) {
+
+	public CartePaiementDto(String nomProprietaire, String prenomProprietaire, String numero, String dateLimite,
+			String cryptogramme, String cleCryptage, User userCarte) {
 		super();
 		this.nomProprietaire = nomProprietaire;
 		this.prenomProprietaire = prenomProprietaire;
@@ -79,9 +49,11 @@ public class CartePaiement {
 	}
 
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 
 	public String getNomProprietaire() {
@@ -89,14 +61,17 @@ public class CartePaiement {
 	}
 
 
+
 	public void setNomProprietaire(String nomProprietaire) {
 		this.nomProprietaire = nomProprietaire;
 	}
 
 
+
 	public String getPrenomProprietaire() {
 		return prenomProprietaire;
 	}
+
 
 
 	public void setPrenomProprietaire(String prenomProprietaire) {
@@ -105,17 +80,15 @@ public class CartePaiement {
 
 
 
-	public byte[] getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
 
 
-	public void setNumero(byte[] numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-
-
 
 
 
@@ -124,46 +97,41 @@ public class CartePaiement {
 	}
 
 
+
 	public void setDateLimite(String dateLimite) {
 		this.dateLimite = dateLimite;
 	}
 
 
-	public byte[] getCryptogramme() {
+
+	public String getCryptogramme() {
 		return cryptogramme;
 	}
 
 
 
-
-
-	public void setCryptogramme(byte[] cryptogramme) {
+	public void setCryptogramme(String cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
 
 
 
-
-
-	public byte[] getCleCryptage() {
+	public String getCleCryptage() {
 		return cleCryptage;
 	}
 
 
 
-
-
-	public void setCleCryptage(byte[] cleCryptage) {
+	public void setCleCryptage(String cleCryptage) {
 		this.cleCryptage = cleCryptage;
 	}
-
-
 
 
 
 	public User getUserCarte() {
 		return userCarte;
 	}
+
 
 
 	public void setUserCarte(User userCarte) {
@@ -174,11 +142,9 @@ public class CartePaiement {
 
 
 
-
-
 	
-
-
-
+	
+	
+	
 
 }
