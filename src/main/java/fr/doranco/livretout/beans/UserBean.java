@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import fr.doranco.livretout.control.IUserMetier;
 import fr.doranco.livretout.control.UserMetier;
 import fr.doranco.livretout.dto.AdresseDto;
+import fr.doranco.livretout.dto.CartePaiementDto;
 import fr.doranco.livretout.dto.UserDto;
 import fr.doranco.livretout.entity.Adresse;
 import fr.doranco.livretout.entity.User;
@@ -33,6 +34,7 @@ public class UserBean implements Serializable {
 	
 	@ManagedProperty(name = "prenom", value = "")
 	private String prenom;
+
 	
 	@ManagedProperty(name = "email", value = "")
 	private String email;
@@ -59,6 +61,27 @@ public class UserBean implements Serializable {
 	
 	@ManagedProperty(name = "messageError", value = "")
 	private String messageError;
+	
+	// attributs des cartes de paiement
+	
+	@ManagedProperty(name = "nomProprietaire", value = "")
+	private String nomProprietaire;
+	
+	@ManagedProperty(name = "prenomProprietaire", value = "")
+	private String prenomProprietaire;
+	
+	@ManagedProperty(name = "numeroCb", value = "")
+	private String numeroCb;
+	
+	
+	@ManagedProperty(name = "dateLimite", value = "")
+	private String dateLimite;
+	
+	
+	@ManagedProperty(name = "cryptogramme", value = "")
+	private String cryptogramme;
+	
+	
 
 	public UserBean() {
 	}
@@ -66,6 +89,10 @@ public class UserBean implements Serializable {
 	public String save() {
 		UserDto user = new UserDto();
 		AdresseDto adresse = new AdresseDto();
+		
+		CartePaiementDto cartePaiementDto = new CartePaiementDto();
+		
+		
 		
 		user.setNom(nom.trim());
 		user.setPrenom(prenom.trim());
@@ -76,6 +103,16 @@ public class UserBean implements Serializable {
 		adresse.setVille(ville.trim());
 		adresse.setCodePostal(codePostal.trim());
 		user.getAdresses().add(adresse);
+		
+		cartePaiementDto.setNomProprietaire(nomProprietaire);
+		cartePaiementDto.setPrenomProprietaire(prenomProprietaire);
+		cartePaiementDto.setNumero(numeroCb);
+		cartePaiementDto.setDateLimite(dateLimite);
+		cartePaiementDto.setCryptogramme(cryptogramme);
+		
+		user.getCartes().add(cartePaiementDto);
+		
+		
 		
 		try {
 			userMetier.add(user);
@@ -189,6 +226,46 @@ public class UserBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNomProprietaire() {
+		return nomProprietaire;
+	}
+
+	public void setNomProprietaire(String nomProprietaire) {
+		this.nomProprietaire = nomProprietaire;
+	}
+
+	public String getPrenomProprietaire() {
+		return prenomProprietaire;
+	}
+
+	public void setPrenomProprietaire(String prenomProprietaire) {
+		this.prenomProprietaire = prenomProprietaire;
+	}
+
+	public String getNumeroCb() {
+		return numeroCb;
+	}
+
+	public void setNumeroCb(String numeroCb) {
+		this.numeroCb = numeroCb;
+	}
+
+	public String getDateLimite() {
+		return dateLimite;
+	}
+
+	public void setDateLimite(String dateLimite) {
+		this.dateLimite = dateLimite;
+	}
+
+	public String getCryptogramme() {
+		return cryptogramme;
+	}
+
+	public void setCryptogramme(String cryptogramme) {
+		this.cryptogramme = cryptogramme;
 	}
 
 	

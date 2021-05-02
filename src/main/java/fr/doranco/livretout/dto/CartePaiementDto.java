@@ -12,15 +12,17 @@ import fr.doranco.livretout.entity.User;
 
 public class CartePaiementDto {
 	
-	private Integer id;
+	//private Integer id;
 	private String nomProprietaire;
 	private String prenomProprietaire;
 	private String numero;
 	private String dateLimite;
 	private String cryptogramme;
-	private String cleCryptage;
+	//private String cleCryptage;
 	// je pense : il y a un seul user donc pas de list
-	private User userCarte;
+//pas besoin du user ici, la classe dto sert juste a transporter au metier
+	
+	//private User userCarte;
 	
 	
 	public CartePaiementDto() {
@@ -30,29 +32,41 @@ public class CartePaiementDto {
 
 
 
+
+
+
 	public CartePaiementDto(String nomProprietaire, String prenomProprietaire, String numero, String dateLimite,
-			String cryptogramme, String cleCryptage, User userCarte) {
+			String cryptogramme) {
 		super();
 		this.nomProprietaire = nomProprietaire;
 		this.prenomProprietaire = prenomProprietaire;
 		this.numero = numero;
 		this.dateLimite = dateLimite;
 		this.cryptogramme = cryptogramme;
-		this.cleCryptage = cleCryptage;
-		this.userCarte = userCarte;
 	}
 
-
-
-	public Integer getId() {
-		return id;
-	}
+	
 
 
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
+
+
+
+
+
+
+
+
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 
 
@@ -113,30 +127,30 @@ public class CartePaiementDto {
 	public void setCryptogramme(String cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
+//
+//
+//
+//	public String getCleCryptage() {
+//		return cleCryptage;
+//	}
+//
+//
+//
+//	public void setCleCryptage(String cleCryptage) {
+//		this.cleCryptage = cleCryptage;
+//	}
 
 
 
-	public String getCleCryptage() {
-		return cleCryptage;
-	}
+//	public User getUserCarte() {
+//		return userCarte;
+//	}
+//
+//
 
-
-
-	public void setCleCryptage(String cleCryptage) {
-		this.cleCryptage = cleCryptage;
-	}
-
-
-
-	public User getUserCarte() {
-		return userCarte;
-	}
-
-
-
-	public void setUserCarte(User userCarte) {
-		this.userCarte = userCarte;
-	}
+//	public void setUserCarte(UserDto userCarte) {
+//		this.userCarte = userCarte;
+//	}
 
 
 

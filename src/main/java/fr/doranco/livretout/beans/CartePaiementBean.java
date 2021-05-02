@@ -1,6 +1,8 @@
 package fr.doranco.livretout.beans;
 
-import java.util.Date;
+
+
+import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,10 +13,16 @@ import fr.doranco.livretout.dto.CartePaiementDto;
 import fr.doranco.livretout.entity.CartePaiement;
 
 @ManagedBean(name ="cartePaiementBean")
-public class CartePaiementBean {
+public class CartePaiementBean implements Serializable {
 
 
 		
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 		private final ICartePaiementMetier cartePaiementMetier = new CartePaiementMetier();
 		private final CartePaiementDto cartePaiementDto = new CartePaiementDto();
 		
@@ -61,7 +69,7 @@ public class CartePaiementBean {
 		    cartePaiementDto.setNumero(numero.trim());
 		    cartePaiementDto.setDateLimite(datelimite.trim());
 		    cartePaiementDto.setCryptogramme(cryptogramme.trim());
-		    cartePaiementDto.setCleCryptage(clecryptage.trim());
+		    //cartePaiementDto.setCleCryptage(clecryptage.trim());
 		    //cartePaiementDto.setUserCarte(usercarte.trim()));
 		    System.out.println("on a passe les argument" +cartePaiementDto.getNomProprietaire());
 		    

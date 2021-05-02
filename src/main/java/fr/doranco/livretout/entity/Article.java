@@ -47,18 +47,22 @@ public class Article {
 	
 	
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "article", fetch = FetchType.LAZY)
-	private List<Commentaire> commentaires;
-	
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "article", fetch = FetchType.LAZY)
+//	private List<Commentaire> commentaires;
+//	
 	
 	@ManyToOne
 	@JoinColumn(name="category_id",nullable = false )
 	private Category category;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "article", fetch = FetchType.LAZY)
+	private List<LigneCommande> ligneCommandes;
+	
 	public Article() {
 		
 		// on doit instancier une liste ds le constructeur (mm vide) sinon on ne pourra pas la remplir
-		commentaires = new ArrayList<Commentaire>();
+		//commentaires = new ArrayList<Commentaire>();
+		ligneCommandes = new ArrayList<LigneCommande>();
 		
 	}
 
@@ -70,7 +74,10 @@ public class Article {
 		this.prix = prix;
 		this.remise = remise;
 		this.quantite = quantite;
-		commentaires = new ArrayList<Commentaire>();
+		
+		ligneCommandes = new ArrayList<LigneCommande>();
+		
+		//commentaires = new ArrayList<Commentaire>();
 		
 	}
 	
@@ -132,10 +139,12 @@ public class Article {
 	public void setRemise(Integer remise) {
 		this.remise = remise;
 	}
-	
-	public List<Commentaire> getCommentaires() {
-		return commentaires;
+
+	public List<LigneCommande> getLigneCommandes() {
+		return ligneCommandes;
 	}
+	
+	
 	
 	
 

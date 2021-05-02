@@ -65,14 +65,14 @@ public class User implements Serializable {
 //	@Column(name = "profil", nullable = false)
 //	private String profil;
 //	
-//	@NotEmpty
-//	@Column(name = "date_naissance", nullable = false)
-//	private Date dateNaissance;
 	
-	@NotNull
-	@Column(name = "date_naissance", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date dateNaissance;
+//	@Column(name = "date_naissance", nullable = false)
+//	private String dateNaissance;
+	
+//	@NotNull
+//	@Column(name = "date_naissance", nullable = false)
+//	@Temporal(TemporalType.DATE)
+//	private Date dateNaissance;
 	
 //	@NotEmpty
 //	@Column(name = "telephone", nullable = false)
@@ -89,8 +89,8 @@ public class User implements Serializable {
 //	@Column(name = "adresse_livraison", nullable = false)
 //	private Integer adresseLivraisonId;
 //	
-//	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-//	private List<CartePaiement> cartes;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	private List<CartePaiement> cartes;
 //	
 //	//@NotNull
 //	//@Column(name = "carte_paiement_default", nullable = false)
@@ -107,10 +107,15 @@ public class User implements Serializable {
 
 	public User() {
 		// Tu instancies dans le constructeur les listes pour éviter de les avoir en null et retourner une exception
+		
 		adresses = new ArrayList<Adresse>();
-//		cartes = new ArrayList<CartePaiement>();
+
+		
+		cartes = new ArrayList<CartePaiement>();
 //		commandes = new ArrayList<Commande>();
 //		panier = new ArrayList<ArticlePanier>();
+//		
+		
 		commentaires = new ArrayList<Commentaire>();
 		
 	}
@@ -125,6 +130,7 @@ public class User implements Serializable {
 	this.email = email;
 	adresses = new ArrayList<Adresse>();
 	commentaires = new ArrayList<Commentaire>();
+	cartes = new ArrayList<CartePaiement>();
 }
 
 
@@ -192,6 +198,15 @@ public class User implements Serializable {
 	public void setCleCryptage(byte[] cleCryptage) {
 		this.cleCryptage = cleCryptage;
 	}
+
+
+
+	public List<CartePaiement> getCartes() {
+		return cartes;
+	}
+
+
+
 
 	
 	

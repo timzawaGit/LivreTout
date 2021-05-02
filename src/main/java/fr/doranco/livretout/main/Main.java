@@ -18,13 +18,17 @@ import fr.doranco.livretout.dao.AdresseDao;
 import fr.doranco.livretout.dao.ArticleDao;
 import fr.doranco.livretout.dao.CartePaiementDao;
 import fr.doranco.livretout.dao.CategoryDao;
+import fr.doranco.livretout.dao.CommandeDao;
 import fr.doranco.livretout.dao.CommentaireDao;
+import fr.doranco.livretout.dao.LigneCommandeDao;
 import fr.doranco.livretout.dao.UserDao;
 import fr.doranco.livretout.entity.Adresse;
 import fr.doranco.livretout.entity.Article;
 import fr.doranco.livretout.entity.CartePaiement;
 import fr.doranco.livretout.entity.Category;
+import fr.doranco.livretout.entity.Commande;
 import fr.doranco.livretout.entity.Commentaire;
+import fr.doranco.livretout.entity.LigneCommande;
 import fr.doranco.livretout.entity.User;
 import fr.doranco.livretout.enums.AlgoCryptage;
 
@@ -49,51 +53,122 @@ public class Main {
 	private static final CartePaiementMetier cartePaiementMetier = new CartePaiementMetier();
 	private static final CartePaiementDao cartePaiementDao = new CartePaiementDao();
 
+	private static final LigneCommandeDao ligneCommandeDao = new LigneCommandeDao();
+	
+	private static final CommandeDao commandeDao = new CommandeDao();
+	
+	
 	public static void main(String[] args) {
+		
+//		String message= "blabla";
+//		
+//		 SecretKey secretKey;
+		try {
+//			secretKey = GenerateKey.getKey(AlgoCryptage.DES.toString(), 56);
+//			String keyString = new String(secretKey.getEncoded());
+//			byte[] messageEncrypteEnByte = CryptageDES.encrypt(message, secretKey);
+		
+//		User user1 = new User();
+//		user1.setNom("tim");
+//		user1.setPrenom("zawa");
+//		user1.setEmail("tt@gmail.com");
+//		user1.setPassword(messageEncrypteEnByte);
+//		user1.setCleCryptage(messageEncrypteEnByte);
+//		
+		Category category = new Category();
+		category.setNomCategory("fruits");
+		category.setRemise(10);
+////		
+//		
+		Article article = new Article();
+		article.setIntitule("mirtille");
+		article.setPrix(2);
+		article.setDescription("des fruits bio venant des montagne du caucase");
+		article.setRemise(10);
+		article.setQuantite(1);
+		article.setCategory(category);
+		//category.getArticles().add(article);
+		
+		
+		LigneCommande ligne1 = new LigneCommande();
+		ligne1.setQuantite(1);
+		ligne1.setPrixUnite(3);
+		ligne1.setPrixTotal(3);
+//		ligne1.setUser(user1);
+		ligne1.setArticle(article);
+	//	article.getLigneCommandes().add(ligne1);
+		
+		
+//		Commande commande = new Commande();
+//		commande.setDateAchat("hoje");
+//		commande.setDateLivraison("amanha");
+//		commande.setFraisExpedition(12);
+//		commande.setPrixTotal(20);
+//		commande.setRemise(2);
+		
+//		ligne1.setCommande(commande);
+		
+//		userDao.add(user1);
+		categoryDao.addCategory(category);
+		articleDao.addArticle(article);
+		ligneCommandeDao.add(ligne1);
+//		commandeDao.add(commande);
+		
+		System.out.println("ca semble fctionner");
+		
+		
+//		ligne1.setCommande(commande);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		//ligne1.setArticle(article);
 		
 		
 
-		String message= "blabla";
-		
-		 SecretKey secretKey;
-		try {
-			secretKey = GenerateKey.getKey(AlgoCryptage.DES.toString(), 56);
-			String keyString = new String(secretKey.getEncoded());
-			byte[] messageEncrypteEnByte = CryptageDES.encrypt(message, secretKey);
-			User user1 = new User();
-			user1.setNom("tim");
-			user1.setPrenom("zawa");
-			user1.setEmail("tt@gmail.com");
-			user1.setPassword(messageEncrypteEnByte);
-			user1.setCleCryptage(messageEncrypteEnByte);
-			CartePaiement cartePaiement = new CartePaiement();
-			cartePaiement.setNomProprietaire("Phoun");
-			cartePaiement.setPrenomProprietaire("Somaly");
-			cartePaiement.setCleCryptage(messageEncrypteEnByte);
-			cartePaiement.setCryptogramme(messageEncrypteEnByte);
-			cartePaiement.setDateLimite("bbbb");
-			cartePaiement.setNumero(messageEncrypteEnByte);
-			cartePaiement.setUserCarte(user1);
-			userMetier2.add(user1);
-			System.out.println("user ajoute: " + user1.getId());
-			cartePaiementMetier.add(cartePaiement);
-			System.out.println("Carte P ajoutee: " + cartePaiement.getId());
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	  	
-		
-	  
-	
-		
-		
-		
-		try {
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+//		String message= "blabla";
+//		
+//		 SecretKey secretKey;
+//		try {
+//			secretKey = GenerateKey.getKey(AlgoCryptage.DES.toString(), 56);
+//			String keyString = new String(secretKey.getEncoded());
+//			byte[] messageEncrypteEnByte = CryptageDES.encrypt(message, secretKey);
+//			User user1 = new User();
+//			user1.setNom("tim");
+//			user1.setPrenom("zawa");
+//			user1.setEmail("tt@gmail.com");
+//			user1.setPassword(messageEncrypteEnByte);
+//			user1.setCleCryptage(messageEncrypteEnByte);
+//			CartePaiement cartePaiement = new CartePaiement();
+//			cartePaiement.setNomProprietaire("Phoun");
+//			cartePaiement.setPrenomProprietaire("Somaly");
+//			cartePaiement.setCleCryptage(messageEncrypteEnByte);
+//			cartePaiement.setCryptogramme(messageEncrypteEnByte);
+//			cartePaiement.setDateLimite("bbbb");
+//			cartePaiement.setNumero(messageEncrypteEnByte);
+//			cartePaiement.setUserCarte(user1);
+//			userMetier2.add(user1);
+//			System.out.println("user ajoute: " + user1.getId());
+//			cartePaiementMetier.add(cartePaiement);
+//			System.out.println("Carte P ajoutee: " + cartePaiement.getId());
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//	  	
+//		
+//	  
+//	
+//		
+//		
+//		
+//		try {
+//			
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
 
 //			System.out.println("article ajoute: " + article.getId());
 //			userDao.add(user1);
@@ -362,7 +437,9 @@ public class Main {
 //	}
 //
 
-
+		}
+		
 	}
 	
-}
+	
+

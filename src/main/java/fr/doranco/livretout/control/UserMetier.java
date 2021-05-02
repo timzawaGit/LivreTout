@@ -10,8 +10,10 @@ import fr.doranco.livretout.control.cryptage.keys.GenerateKey;
 import fr.doranco.livretout.dao.IUserDao;
 import fr.doranco.livretout.dao.UserDao;
 import fr.doranco.livretout.dto.AdresseDto;
+import fr.doranco.livretout.dto.CartePaiementDto;
 import fr.doranco.livretout.dto.UserDto;
 import fr.doranco.livretout.entity.Adresse;
+import fr.doranco.livretout.entity.CartePaiement;
 import fr.doranco.livretout.entity.User;
 import fr.doranco.livretout.enums.AlgoCryptage;
 
@@ -52,6 +54,24 @@ public class UserMetier implements IUserMetier {
 				adresse.setCodePostal(adressDto.getCodePostal().trim());
 				adresse.setUser(user);
 				user.getAdresses().add(adresse);
+			}
+		}
+		
+		// set carte paiement
+		
+		if(userDto.getCartes()!=null && !userDto.getCartes().isEmpty()) {
+			for(CartePaiementDto cartePaiementDto : userDto.getCartes()) {
+				CartePaiement cartePaiement = new CartePaiement();
+				cartePaiement.setNomProprietaire(cartePaiementDto.getNomProprietaire());
+				cartePaiement.setPrenomProprietaire(cartePaiementDto.getPrenomProprietaire());
+				cartePaiement.setDateLimite(cartePaiementDto.getDateLimite());
+				
+				
+				cartePaiement.setNumero(CryptageDES.encrypt(cartePaiementDto.getNumero(), secretKey));
+				cartePaiement.setCryptogramme(CryptageDES.encrypt(cartePaiementDto.getCryptogramme(), secretKey));
+				cartePaiement.setCleCryptage(secretKey.getEncoded());
+				cartePaiement.setUserCarte(user);
+				user.getCartes().add(cartePaiement);
 			}
 		}
 		

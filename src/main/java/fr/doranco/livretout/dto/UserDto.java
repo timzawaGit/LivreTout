@@ -11,9 +11,11 @@ public class UserDto {
 	private String email;
 	private String password;
 	private List<AdresseDto> adresses;
+	private List<CartePaiementDto> cartes;
 	
 	public UserDto() {
 		adresses = new ArrayList<AdresseDto>();
+		cartes = new ArrayList<CartePaiementDto>();
 	}
 
 	public UserDto(String nom, String prenom, String email, String password) {
@@ -23,6 +25,7 @@ public class UserDto {
 		this.email = email;
 		this.password = password;
 		adresses = new ArrayList<AdresseDto>();
+		cartes = new ArrayList<CartePaiementDto>();
 	}
 
 	public Integer getId() {
@@ -73,6 +76,10 @@ public class UserDto {
 	public String toString() {
 		return "UserDto [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password="
 				+ password + ", adresses=" + adresses + "]";
+	}
+
+	public List<CartePaiementDto> getCartes() {
+		return cartes;
 	}
 
 	

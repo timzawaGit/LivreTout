@@ -12,7 +12,7 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 		<property name="current_session_context_class">thread</property>
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>   <!-- create/create-drop/update/validate -->
+		<property name="hibernate.hbm2ddl.auto">create</property>   <!-- create/create-drop/update/validate -->
 		<property name="hibernate.charset">UTF-8</property>
 		<mapping class="fr.doranco.livretout.entity.Article"></mapping>
 		<mapping class="fr.doranco.livretout.entity.Category"></mapping>
@@ -20,6 +20,8 @@
 		<mapping class="fr.doranco.livretout.entity.Adresse"></mapping>
 		<mapping class="fr.doranco.livretout.entity.Commentaire"></mapping>
 		<mapping class="fr.doranco.livretout.entity.CartePaiement"></mapping>
+		<mapping class="fr.doranco.livretout.entity.Commande"></mapping>
+		<mapping class="fr.doranco.livretout.entity.LigneCommande"></mapping>
 	
 	</session-factory>
 </hibernate-configuration>
