@@ -49,9 +49,9 @@ public class UserDao implements IUserDao {
 		Session session = HibernateConnector.getsession();
 		User user = session.get(User.class, id);
 		
-				if (session != null && session.isOpen())
-					session.close();
-				return user;
+		if (session != null && session.isOpen())
+			session.close();
+		return user;
 	}
 
 

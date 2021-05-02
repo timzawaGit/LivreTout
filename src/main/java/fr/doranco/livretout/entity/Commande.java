@@ -16,34 +16,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table (name ="commande")
+//@Entity
+//@Table (name ="commande")
 public class Commande {
 	
-		@Id
-		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		@Column(name = "id", nullable = false)
+//		@Id
+//		@GeneratedValue(strategy=GenerationType.IDENTITY)
+//		@Column(name = "id", nullable = false)
 		private Integer id;
 		
 		
-		@Column(name = "date_achat", length=45, nullable = false)
+//		@Column(name = "date_achat", length=45, nullable = false)
 		private String dateAchat;
 		
-		@NotNull
-		@Column(name = "prix_total", length=5, nullable = false)
+//		@NotNull
+//		@Column(name = "prix_total", length=5, nullable = false)
 		private Integer prixTotal;
 		
-		@NotNull
-		@Column(name = "remise", length=5, nullable = false)
+//		@NotNull
+//		@Column(name = "remise", length=5, nullable = false)
 		private Integer remise;
 		
 		
-		@NotNull
-		@Column(name = "frais_expedition", length=5, nullable = false)
+//		@NotNull
+//		@Column(name = "frais_expedition", length=5, nullable = false)
 		private Integer fraisExpedition;
 		
 
-		@Column(name = "date_livraison", length=45, nullable = false)
+//		@Column(name = "date_livraison", length=45, nullable = false)
 		private String dateLivraison;
 //
 //		@OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.LAZY)
@@ -63,17 +63,17 @@ public class Commande {
 	
 
 
-		public Commande(String dateAchat, @NotNull Integer prixTotal, @NotNull Integer remise,
-				@NotNull Integer fraisExpedition, String dateLivraison, List<LigneCommande> ligneCommandes, User user) {
-			super();
-			this.dateAchat = dateAchat;
-			this.prixTotal = prixTotal;
-			this.remise = remise;
-			this.fraisExpedition = fraisExpedition;
-			this.dateLivraison = dateLivraison;
-//			this.ligneCommandes = ligneCommandes;
-//			this.user = user;
-		}
+//		public Commande(String dateAchat, @NotNull Integer prixTotal, @NotNull Integer remise,
+//				@NotNull Integer fraisExpedition, String dateLivraison, List<LigneCommande> ligneCommandes, User user) {
+//			super();
+//			this.dateAchat = dateAchat;
+//			this.prixTotal = prixTotal;
+//			this.remise = remise;
+//			this.fraisExpedition = fraisExpedition;
+//			this.dateLivraison = dateLivraison;
+////			this.ligneCommandes = ligneCommandes;
+////			this.user = user;
+//		}
 
 
 

@@ -12,8 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "article_panier")
+//@Entity
+//@Table(name = "article_panier")
 public class ArticlePanier implements Serializable {
 
 	/**
@@ -21,31 +21,24 @@ public class ArticlePanier implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "id", nullable = false)
 	private Integer id;
 	
-	@NotNull
-	@Column(name = "quantite", nullable = false)
+//	@NotNull
+//	@Column(name = "quantite", nullable = false)
 	private Integer quantite;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+//	@ManyToOne
+//	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
-	@ManyToOne
-	@JoinColumn(name = "article_id", nullable = false)
+//	@ManyToOne
+//	@JoinColumn(name = "article_id", nullable = false)
 	private Article article;
 
 	public ArticlePanier() {
-	}
-
-	public ArticlePanier(@NotNull Integer quantite, fr.doranco.livretout.entity.User user, Article article) {
-		super();
-		this.quantite = quantite;
-		this.user = user;
-		this.article = article;
 	}
 
 	public Integer getId() {

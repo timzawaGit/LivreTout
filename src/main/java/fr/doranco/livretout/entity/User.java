@@ -15,9 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -99,8 +96,8 @@ public class User implements Serializable {
 //	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 //	private List<Commande> commandes;
 //	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Commentaire> commentaires;
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+//	private List<Commentaire> commentaires;
 //	
 //	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 //	private List<ArticlePanier> panier;
@@ -109,29 +106,37 @@ public class User implements Serializable {
 		// Tu instancies dans le constructeur les listes pour éviter de les avoir en null et retourner une exception
 		
 		adresses = new ArrayList<Adresse>();
-
-		
 		cartes = new ArrayList<CartePaiement>();
+
+
 //		commandes = new ArrayList<Commande>();
 //		panier = new ArrayList<ArticlePanier>();
 //		
 		
-		commentaires = new ArrayList<Commentaire>();
+//		commentaires = new ArrayList<Commentaire>();
 		
 	}
 	
 	
 
-	public User(@NotEmpty String nom, @NotEmpty String prenom,
-		@NotEmpty @Size(min = 5, max = 20, message = "Le Email doit être compris entre 5 et 20 caractères") String email) {
+	
+
+
+	public User(@NotNull String nom, @NotNull String prenom,
+		@NotNull @Size(min = 5, max = 20, message = "Le Email doit être compris entre 5 et 20 caractères") String email,
+		@NotNull @Size(min = 6, max = 15, message = "Le mot de passe doit être compris entre 6 et 15 caractères") byte[] password) {
 	super();
 	this.nom = nom;
 	this.prenom = prenom;
 	this.email = email;
+	this.password = password;
 	adresses = new ArrayList<Adresse>();
-	commentaires = new ArrayList<Commentaire>();
 	cartes = new ArrayList<CartePaiement>();
+	
 }
+
+
+
 
 
 
@@ -201,17 +206,13 @@ public class User implements Serializable {
 
 
 
+
+
+
 	public List<CartePaiement> getCartes() {
 		return cartes;
 	}
 
-
-
-
-	
-	
-	
-	
 	
 	
 	

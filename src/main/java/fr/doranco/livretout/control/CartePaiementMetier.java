@@ -62,7 +62,7 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 			user.setPassword(CryptageDES.encrypt(message, secretKey));
 			userDao.add(user); 
 		
-			cartePaiement.setUserCarte(user);
+			
 			cartePaiementDao.add(cartePaiement);
 		
 	}

@@ -14,8 +14,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "commentaire")
+//@Entity
+//@Table(name = "commentaire")
 public class Commentaire implements Serializable {
 
 	/**
@@ -23,26 +23,26 @@ public class Commentaire implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "id", nullable = false)
 	private Integer id;
 	
 	
-	@Column(name = "texte", nullable = false)
+//	@Column(name = "texte", nullable = false)
 //	@Size(min = 5, max = 300, message = "Le texte doit être compris entre 5 et 300 caractères")
 	private String texte;
 	
-	@NotNull
-	@Column(name = "note", nullable = false)
+//	@NotNull
+//	@Column(name = "note", nullable = false)
 	private Float note;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
+//	@ManyToOne
+//	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
-	@ManyToOne
-	@JoinColumn(name = "article_id", nullable = false)
+//	@ManyToOne
+//	@JoinColumn(name = "article_id", nullable = false)
 	private Article article;
 
 	public Commentaire() {
@@ -50,15 +50,15 @@ public class Commentaire implements Serializable {
 
 	
 
-	public Commentaire(
-			 @Size(min = 5, max = 300, message = "Le texte doit être compris entre 5 et 300 caractères") String texte,
-			@NotNull Float note, User user, Article article) {
-		super();
-		this.texte = texte;
-		this.note = note;
-		this.user = user;
-		this.article = article;
-	}
+//	public Commentaire(
+//			 @Size(min = 5, max = 300, message = "Le texte doit être compris entre 5 et 300 caractères") String texte,
+//			@NotNull Float note, User user, Article article) {
+//		super();
+//		this.texte = texte;
+//		this.note = note;
+//		this.user = user;
+//		this.article = article;
+//	}
 
 
 

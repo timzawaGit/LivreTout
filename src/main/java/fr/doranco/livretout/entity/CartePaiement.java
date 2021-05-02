@@ -1,5 +1,6 @@
 package fr.doranco.livretout.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,9 +16,14 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table (name ="carte_paiement")
-public class CartePaiement {
+@Table(name ="carte_paiement")
+public class CartePaiement implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
@@ -38,7 +44,6 @@ public class CartePaiement {
 	//@Temporal(TemporalType.DATE)
 	private String dateLimite;
 	
-	
 	@NotNull
 	@Column(name = "cryptogramme", length=5, nullable = false)
 	private byte[] cryptogramme;
@@ -49,8 +54,7 @@ public class CartePaiement {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private User userCarte;
-	
+	private User user;
 	
 	// mettre surement une propriete avec enumeration (visa, mastercard etc...)
 	
@@ -60,7 +64,7 @@ public class CartePaiement {
 
 
 	public CartePaiement(String nomProprietaire, String prenomProprietaire, @NotNull byte[] numero, String dateLimite,
-			@NotNull byte[] cryptogramme, @NotNull byte[] cleCryptage, User userCarte) {
+			@NotNull byte[] cryptogramme, @NotNull byte[] cleCryptage) {
 		super();
 		this.nomProprietaire = nomProprietaire;
 		this.prenomProprietaire = prenomProprietaire;
@@ -68,7 +72,6 @@ public class CartePaiement {
 		this.dateLimite = dateLimite;
 		this.cryptogramme = cryptogramme;
 		this.cleCryptage = cleCryptage;
-		this.userCarte = userCarte;
 	}
 
 
@@ -157,17 +160,17 @@ public class CartePaiement {
 	}
 
 
-
-
-
-	public User getUserCarte() {
-		return userCarte;
+	public User getUser() {
+		return user;
 	}
 
 
-	public void setUserCarte(User userCarte) {
-		this.userCarte = userCarte;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+
+
 
 
 
